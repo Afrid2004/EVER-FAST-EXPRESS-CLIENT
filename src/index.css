@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+body{
+  @apply bg-gray-100;
+}
+:root{
+  --body-dark: #1a202c;
+  --body-secondary: #4a5565;
+}
+.container{
+  @apply px-4 lg:px-0 w-full max-w-110 sm:max-w-150 md:max-w-187.5 lg:max-w-250 xl:max-w-300 2xl:max-w-325 mx-auto;
+}
+.text-dark{
+  color: var(--body-dark);
+}
+.bg-dark{
+  background: var(--body-dark);
+}
+.text-secondary{
+  color: var(--body-secondary);
+}
+.active-link{
+  position: relative;
+}
+.active-link::after{
+  position: absolute;
+  content: "";
+  bottom: -0.3rem;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 30px;
+  @apply bg-lime-500;
+}
+
+
+.gradient-dark-text{
+  background-image: linear-gradient(to right, transparent, #253243, transparent);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
