@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <div>
       <div className="container">
-        <div className="bg-dark p-10 md:p-20 pb-0 md:pb-0 rounded-2xl">
+        <div className="bg-gray-900 p-10 md:p-20 pb-0 md:pb-5 mb-5 rounded-2xl">
           <div className="flex items-center justify-center flex-col gap-9">
             <div className="w-full lg:max-w-3xl flex items-center gap-5 flex-col justify-center">
               <div className="opacity-80">
@@ -42,6 +42,11 @@ const Footer = () => {
                 </a>
               </div>
             </div>
+            <div>
+              <h3 className="uppercase text-9xl md:text-8xl lg:text-[150px] leading-none font-black text-center gradient-dark-text select-none">
+                Ever Fast
+              </h3>
+            </div>
             <div className="py-4 w-full">
               <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-2">
                 <div className="text-center lg:text-left">
@@ -64,12 +69,6 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="mt-3">
-            <h3 className="uppercase text-9xl md:text-8xl lg:text-[150px] leading-none font-black text-center gradient-dark-text select-none">
-              Ever Fast
-            </h3>
           </div>
         </div>
       </div>

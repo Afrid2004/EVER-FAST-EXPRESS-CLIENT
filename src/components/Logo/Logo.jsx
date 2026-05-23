@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router";
 
-const Logo = () => {
+const Logo = ({ size = "w-30" }) => {
   return (
-    <div className="w-30">
+    <div className={`${size} shrink-0`}>
       <Link to="/">
         <div>
           <img

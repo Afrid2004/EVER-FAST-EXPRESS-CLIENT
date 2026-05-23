@@ -1,33 +1,26 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-*{
+* {
   font-family: "Poppins", sans-serif;
   font-style: normal;
 }
-body{
+body {
   @apply bg-gray-100;
 }
-:root{
-  --body-dark: #1a202c;
-  --body-secondary: #4a5565;
-}
-.container{
+.container {
   @apply px-4 lg:px-0 w-full max-w-110 sm:max-w-150 md:max-w-187.5 lg:max-w-250 xl:max-w-300 2xl:max-w-325 mx-auto;
 }
-.text-dark{
-  color: var(--body-dark);
+.mobile-menu .active {
+  @apply bg-lime-400  border-lime-500/50 duration-75 text-gray-900;
 }
-.bg-dark{
-  background: var(--body-dark);
+.desktop-menu .active {
+  @apply relative text-gray-900;
 }
-.text-secondary{
-  color: var(--body-secondary);
+.mobile-menu .mobile-signup {
+  flex-grow: 1;
 }
-.active-link{
-  position: relative;
-}
-.active-link::after{
+.desktop-menu .active::after {
   position: absolute;
   content: "";
   bottom: -0.3rem;
@@ -38,9 +31,24 @@ body{
   @apply bg-lime-500;
 }
 
+.mobile-menu > a {
+  @apply bg-gray-200/50 px-4 py-2 border border-gray-200 rounded-lg hover:bg-lime-400 hover:border-lime-500/50 duration-75;
+}
 
-.gradient-dark-text{
-  background-image: linear-gradient(to right, transparent, #253243, transparent);
+.gradient-dark-text {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    #2e3e52,
+    transparent
+  );
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.custom-pagination .swiper-pagination-bullet {
+  @apply bg-gray-500 w-8 h-1.5 rounded-sm cursor-pointer hover:bg-gray-800;
+}
+.custom-pagination .swiper-pagination-bullet-active {
+  @apply bg-lime-500 w-12 hover:bg-lime-500 duration-150;
 }
