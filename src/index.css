@@ -52,3 +52,35 @@ body {
 .custom-pagination .swiper-pagination-bullet-active {
   @apply bg-lime-500 w-12 hover:bg-lime-500 duration-150;
 }
+
+.bounce-animate {
+  animation: lift 3s ease-in-out infinite;
+  will-change: transform;
+  position: relative;
+}
+
+@keyframes lift {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.bounce-animate::after {
+  content: "";
+  position: absolute;
+  bottom: -3.5rem;
+  left: 0%;
+  width: 100%;
+  height: 20px;
+  background: #7ccf00;
+  filter: blur(12px);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: lift 3s ease-in-out infinite;
+}
