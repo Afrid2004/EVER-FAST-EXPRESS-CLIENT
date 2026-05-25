@@ -99,85 +99,55 @@ export const supportData = [
   },
 ];
 
-export const reviewData = [
+export const faqData = [
   {
-    id: 1,
-    name: "Ahmed Rahman",
-    profession: "Ecommerce Merchant",
-    image: "/images/profile-1.webp",
-    review:
-      "Excellent delivery service! My parcels always arrive on time and the support team is very responsive.",
+    question: "How long does delivery take?",
+    answer:
+      "Delivery time depends on the location. Inside city deliveries take 24–48 hours and outside city deliveries take 2–4 working days.",
   },
   {
-    id: 2,
-    name: "Omar Faruk",
-    profession: "Online Business Owner",
-    image: "/images/profile-2.webp",
-    review:
-      "Very reliable courier service. Cash on delivery process is smooth and secure for my customers.",
+    question: "How can I track my parcel?",
+    answer:
+      "You can track your parcel using the tracking ID on our website’s tracking page. Just enter your ID and get real-time updates.",
   },
   {
-    id: 3,
-    name: "Yusuf Ali",
-    profession: "Fashion Store Owner",
-    image: "/images/profile-3.webp",
-    review:
-      "Fast pickup and professional behavior. Their nationwide delivery helped grow my online business.",
+    question: "Do you provide Cash on Delivery (COD)?",
+    answer:
+      "Yes, we offer Cash on Delivery service in selected areas. Customers can pay after receiving the parcel.",
   },
   {
-    id: 4,
-    name: "Abdullah Hossain",
-    profession: "SME Entrepreneur",
-    image: "/images/profile-4.webp",
-    review:
-      "I am impressed by their delivery speed and parcel safety. Highly recommended for ecommerce merchants.",
+    question: "Can I change my delivery address after booking?",
+    answer:
+      "You can change the address before the parcel is dispatched. Once shipped, changes may not be possible.",
   },
   {
-    id: 5,
-    name: "Hasan Mahmud",
-    profession: "Corporate Client",
-    image: "/images/profile-5.webp",
-    review:
-      "Their tracking system and customer support are excellent. Deliveries are always handled professionally.",
+    question: "What should I do if my parcel is delayed?",
+    answer:
+      "If your parcel is delayed, contact our support team with your tracking ID. We will investigate and update you as soon as possible.",
   },
   {
-    id: 6,
-    name: "Ibrahim Khalid",
-    profession: "Tech Accessories Seller",
-    image: "/images/profile-6.webp",
-    review:
-      "Very smooth service experience. My customers receive products quickly without any hassle.",
+    question: "Is there any customer support available?",
+    answer:
+      "Yes, our customer support team is available 24/7 to help you with any delivery or tracking issues.",
   },
   {
-    id: 7,
-    name: "Tariq Hasan",
-    profession: "Digital Store Owner",
-    image: "/images/profile-7.webp",
-    review:
-      "Affordable pricing with premium service quality. The delivery team is polite and efficient.",
+    question: "How do I book a parcel pickup?",
+    answer:
+      "You can book a pickup through our website or mobile app by filling in the pickup form with your details.",
   },
   {
-    id: 8,
-    name: "Saifuddin Karim",
-    profession: "Merchant",
-    image: "/images/profile-8.webp",
-    review:
-      "Their fulfillment and COD service made managing my online orders much easier than before.",
+    question: "Are there any delivery charges?",
+    answer:
+      "Yes, delivery charges depend on parcel weight, size, and distance. You can check pricing on our pricing page.",
   },
   {
-    id: 9,
-    name: "Bilal Uddin",
-    profession: "Electronics Seller",
-    image: "/images/profile-9.webp",
-    review:
-      "Amazing service quality and very fast delivery. I trust them completely for my daily shipments.",
+    question: "Is my parcel safe during delivery?",
+    answer:
+      "Absolutely. We use secure handling processes and trained delivery staff to ensure your parcel safety.",
   },
   {
-    id: 10,
-    name: "Zayan Ahmed",
-    profession: "Small Business Owner",
-    image: "/images/profile-10.webp",
-    review:
-      "Professional courier service with excellent communication. My business deliveries are now stress free.",
+    question: "Do you deliver nationwide?",
+    answer:
+      "Yes, we provide delivery service all over the country including urban and rural areas.",
   },
 ];

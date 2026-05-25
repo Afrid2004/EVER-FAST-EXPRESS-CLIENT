@@ -3,7 +3,7 @@ import { servicesData } from "../../../Data/Data";
 
 const Services = () => {
   return (
-    <div className="py-20 px-15 bg-gray-900 rounded-2xl">
+    <div className="py-20 px-10 lg:px-15 bg-gray-900 rounded-2xl">
       <div className="mb-8 flex flex-col gap-4 justify-center items-center">
         <h3 className="text-white font-extrabold text-3xl">Our Services</h3>
         <p className="text-gray-400 w-full max-w-3xl text-center">

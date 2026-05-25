@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
@@ -15,10 +15,10 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { FaArrowLeft, FaArrowRight, FaQuoteRight } from "react-icons/fa";
-import { reviewData } from "../../../Data/Data";
 import { MdVerifiedUser } from "react-icons/md";
 
-const Reviews = () => {
+const Reviews = ({ reviewPromise }) => {
+  const reviewData = use(reviewPromise);
   return (
     <div className="py-10">
       <div className="mb-8 flex flex-col gap-4 justify-center items-center">
@@ -80,7 +80,7 @@ const Reviews = () => {
               {reviewData.map((data) => {
                 return (
                   <SwiperSlide key={data.id}>
-                    <div className="bg-white border border-gray-200 p-8 rounded-2xl">
+                    <div className="bg-white border select-none border-gray-200 p-8 rounded-2xl">
                       <div className="flex flex-col gap-5">
                         <div className="border-b-2 border-dashed border-gray-300 pb-3">
                           <div className="text-lime-500 text-4xl mb-3">
@@ -92,14 +92,14 @@ const Reviews = () => {
                           <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
                             <img
                               src={data.image}
-                              alt={data.name}
+                              alt={data.user_name}
                               className="w-full"
                             />
                           </div>
                           <div>
                             <div className="flex items-center gap-1">
                               <h4 className="text-lg font-extrabold text-gray-800">
-                                {data.name}
+                                {data.user_name}
                               </h4>
                               <MdVerifiedUser className="shrink-0 text-gray-700"></MdVerifiedUser>
                             </div>
