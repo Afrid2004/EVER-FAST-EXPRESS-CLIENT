@@ -180,10 +180,16 @@ const Banner = () => {
         <div>
           <div className="flex items-center justify-between gap-5 bg-white">
             <div className="flex items-center gap-3 bg-white rounded-4xl">
-              <button className="prev-btn cursor-pointer w-10 h-10 bg-white flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700">
+              <button
+                aria-label="Previous Slide"
+                className="prev-btn cursor-pointer w-10 h-10 bg-white flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700"
+              >
                 <FaArrowLeft />
               </button>
-              <button className="next-btn cursor-pointer w-10 h-10 bg-white flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700">
+              <button
+                aria-label="Next Slide"
+                className="next-btn cursor-pointer w-10 h-10 bg-white flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700"
+              >
                 <FaArrowRight />
               </button>
             </div>

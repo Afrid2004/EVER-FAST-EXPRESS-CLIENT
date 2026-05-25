@@ -11,7 +11,7 @@ const Marchent = () => {
               <h2 className="text-4xl lg:text-[40px] font-extrabold text-white">
                 Merchant and Customer Satisfaction is Our First Priority
               </h2>
-              <p className="text-gray-600 wrap-break-word">
+              <p className="text-gray-400 wrap-break-word">
                 We offer the lowest delivery charge with the highest value along
                 with 100% safety of your product. Pathao courier delivers your
                 parcels in every corner of Bangladesh right on time.

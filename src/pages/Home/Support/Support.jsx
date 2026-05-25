@@ -18,7 +18,7 @@ const Support = () => {
                     <img src={data.image} alt={data.title} className="w-full" />
                   </div>
                 </div>
-                <div className="">
+                <div>
                   <h3 className="text-xl font-extrabold mb-4">{data.title}</h3>
                   <p className="text-gray-500">{data.desc}</p>
                 </div>

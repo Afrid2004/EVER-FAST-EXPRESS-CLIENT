@@ -21,9 +21,9 @@ const HowItWorks = () => {
                     />
                   </div>
                   <div>
-                    <h5 className="text-xl text-gray-800 font-bold mb-3">
+                    <h4 className="text-xl text-gray-800 font-bold mb-3">
                       {data.title}
-                    </h5>
+                    </h4>
                     <p className="text-gray-500">{data.desc}</p>
                   </div>
                 </div>

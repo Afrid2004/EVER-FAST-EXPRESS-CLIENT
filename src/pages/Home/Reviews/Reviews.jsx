@@ -25,7 +25,7 @@ const Reviews = ({ reviewPromise }) => {
         <h3 className="text-gray-800 font-extrabold text-3xl">
           What our customers are sayings
         </h3>
-        <p className="text-gray-400 w-full max-w-3xl text-center">
+        <p className="text-gray-500 w-full max-w-3xl text-center">
           Enhance posture, mobility, and well-being effortlessly with Posture
           Pro. Achieve proper alignment, reduce pain, and strengthen your body
           with ease!
