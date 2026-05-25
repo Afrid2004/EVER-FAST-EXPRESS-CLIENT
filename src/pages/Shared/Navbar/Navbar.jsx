@@ -15,7 +15,7 @@ const Navbar = () => {
     <>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/services">Services</NavLink>
-      <NavLink to="/services">Covarage</NavLink>
+      <NavLink to="/coverage">Covarage</NavLink>
       <NavLink to="/about-us">About Us</NavLink>
       <NavLink to="/pricing">Pricing</NavLink>
       <NavLink to="/blog">Blog</NavLink>
@@ -81,7 +81,7 @@ const Navbar = () => {
   return (
     <div className="sticky top-2 z-20">
       <div className="container">
-        <div className="bg-white rounded-2xl px-8 py-5 border border-gray-200 mt-5">
+        <div className="bg-white/70 backdrop-blur-3xl rounded-2xl px-8 py-5 border border-gray-200 mt-5">
           <div className="flex items-center justify-between">
             <Logo></Logo>
             {/* Desktop Menus */}

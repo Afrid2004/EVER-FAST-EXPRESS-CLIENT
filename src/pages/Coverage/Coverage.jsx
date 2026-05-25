@@ -1,0 +1,91 @@
+import React from "react";
+import { IoSearchOutline } from "react-icons/io5";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { useLoaderData } from "react-router";
+
+const Coverage = () => {
+  const locations = useLoaderData();
+  console.log(locations);
+  const position = [23.8103, 90.4125];
+  return (
+    <div>
+      <div className="p-10 border border-gray-200 rounded-2xl bg-white">
+        <div>
+          <div className="flex flex-col gap-8 border-b pb-8 mb-8 border-gray-200">
+            <h2 className="text-4xl font-bold text-gray-800">
+              We are available in 64 districts
+            </h2>
+            <div>
+              <form>
+                <div className="bg-gray-100 border border-gray-200 h-11 flex items-center justify-between gap-3 w-full max-w-md rounded-4xl overflow-hidden">
+                  <div className="h-full shrink-0">
+                    <label htmlFor="search">
+                      <div className="h-full flex items-center justify-center ps-3 text-2xl text-gray-800">
+                        <IoSearchOutline></IoSearchOutline>
+                      </div>
+                    </label>
+                  </div>
+                  <div className="grow h-full">
+                    <input
+                      type="text"
+                      name="search"
+                      id="search"
+                      className="h-full w-full outline-none border-none"
+                      placeholder="Search here"
+                      required
+                    />
+                  </div>
+                  <div className="shrink-0  h-full">
+                    <button className="h-full cursor-pointer bg-lime-400 hover:bg-lime-500 focus:bg-lime-400 duration-75 rounded-4xl px-8">
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-3xl text-gray-800 mb-8">
+              We deliver almost all over Bangladesh
+            </h3>
+            <div className="h-125 rounded-2xl overflow-hidden ">
+              <MapContainer
+                className="h-full "
+                center={position}
+                zoom={7}
+                scrollWheelZoom={false}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {locations.map((location, index) => {
+                  return (
+                    <Marker
+                      key={index}
+                      position={[location.latitude, location.longitude]}
+                    >
+                      <Popup>
+                        <p className="font-bold border-b border-gray-300 pb-3 mb-0">
+                          {location.district}
+                        </p>
+                        <p>
+                          <span className="font-bold">Areas: </span>
+                          {location.covered_area.join(", ")}.
+                        </p>
+                      </Popup>
+                    </Marker>
+                  );
+                })}
+              </MapContainer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Coverage;

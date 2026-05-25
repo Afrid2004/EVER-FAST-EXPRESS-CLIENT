@@ -71,14 +71,14 @@ const FAQ = () => {
                 {faqData.length > countFaq ? (
                   <button
                     onClick={handleIncresefaq}
-                    className="bg-lime-400 px-4 py-2 rounded-4xl hover:bg-lime-500 duration-150 cursor-pointer"
+                    className="bg-lime-400 w-fit mx-auto px-4 py-2 rounded-4xl hover:bg-lime-500 duration-150 cursor-pointer"
                   >
                     See More FAQ’s
                   </button>
                 ) : (
                   <button
                     onClick={handleDecresefaq}
-                    className="bg-gray-800 text-white px-4 py-2 rounded-4xl hover:bg-gray-900 duration-150 cursor-pointer"
+                    className="bg-gray-800 text-white px-4 py-2 rounded-4xl hover:bg-gray-900 w-fit mx-auto duration-150 cursor-pointer"
                   >
                     See Less FAQ’s
                   </button>

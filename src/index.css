@@ -75,11 +75,6 @@ body {
   animation: lift 3s ease-in-out infinite;
 }
 
-/* .reviewSwiper .swiper-slide {
-  width: 350px;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-} */
 .reviewSwiper .swiper-slide-active {
   opacity: 1;
 }
@@ -117,7 +112,9 @@ body {
   z-index: 10;
   pointer-events: none;
 }
-
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  z-index: 1;
+}
 @media (min-width: 768px) {
   .review-wrapper::before {
     background: linear-gradient(to right, #f3f4f6, transparent);
