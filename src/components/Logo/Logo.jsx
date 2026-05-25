@@ -7,7 +7,7 @@ const Logo = ({ size = "w-30" }) => {
       <Link to="/">
         <div>
           <img
-            src="/images/everfast_logo.png"
+            src="/images/everfast_logo.webp"
             className="w-full"
             alt="Ever Fast"
           />

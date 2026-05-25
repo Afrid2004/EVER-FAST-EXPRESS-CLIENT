@@ -68,7 +68,7 @@ const Banner = () => {
                     <div className="flex items-center justify-center lg:justify-end">
                       <div className="flex items-center justify-center">
                         <img
-                          src="/images/banner_image_1.png"
+                          src="/images/banner_image_1.webp"
                           className="w-100"
                           alt="banner_1"
                         />
@@ -115,7 +115,7 @@ const Banner = () => {
                     <div className="flex items-center justify-center lg:justify-end">
                       <div className="flex items-center justify-center">
                         <img
-                          src="/images/banner_image_2.png"
+                          src="/images/banner_image_2.webp"
                           className="w-100"
                           alt="banner_1"
                         />
@@ -163,7 +163,7 @@ const Banner = () => {
                     <div className="flex items-center justify-center lg:justify-end">
                       <div className="flex items-center justify-center">
                         <img
-                          src="/images/banner_image_3.png"
+                          src="/images/banner_image_3.webp"
                           className="w-100"
                           alt="banner_1"
                         />
