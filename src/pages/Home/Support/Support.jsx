@@ -1,5 +1,5 @@
 import React from "react";
-import { supportData } from "../../../Data/Data";
+import { supportData } from "../../../../public/Data/Data";
 import { data } from "react-router";
 
 const Support = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import MarqueeImport from "react-fast-marquee";
-import { BrandsData } from "../../../Data/Data";
+import { BrandsData } from "../../../../public/Data/Data";
 const Marquee = MarqueeImport.default || MarqueeImport;
 
 const Brands = () => {

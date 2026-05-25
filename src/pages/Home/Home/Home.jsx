@@ -8,7 +8,7 @@ import Marchent from "../Marchent/Marchent";
 import Reviews from "../Reviews/Reviews";
 import FAQ from "../FAQ/FAQ";
 
-const reviewPromise = fetch("/src/Data/Reviews.json").then((res) => res.json());
+const reviewPromise = fetch("/Data/Reviews.json").then((res) => res.json());
 
 const Home = () => {
   return (

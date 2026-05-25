@@ -1,5 +1,5 @@
 import React from "react";
-import { worksData } from "../../../Data/Data";
+import { worksData } from "../../../../public/Data/Data";
 
 const HowItWorks = () => {
   return (

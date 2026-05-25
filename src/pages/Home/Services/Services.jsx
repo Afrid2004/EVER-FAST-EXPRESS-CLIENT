@@ -1,5 +1,5 @@
 import React from "react";
-import { servicesData } from "../../../Data/Data";
+import { servicesData } from "../../../../public/Data/Data";
 
 const Services = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { faqData } from "../../../Data/Data";
+import { faqData } from "../../../../public/Data/Data";
 import { IoIosArrowDown } from "react-icons/io";
 
 const FAQ = () => {
