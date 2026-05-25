@@ -98,3 +98,86 @@ export const supportData = [
     desc: "Our dedicated support team is available around the clock to assist you with any questions, updates, or delivery concerns—anytime you need us.",
   },
 ];
+
+export const reviewData = [
+  {
+    id: 1,
+    name: "Ahmed Rahman",
+    profession: "Ecommerce Merchant",
+    image: "/images/profile-1.webp",
+    review:
+      "Excellent delivery service! My parcels always arrive on time and the support team is very responsive.",
+  },
+  {
+    id: 2,
+    name: "Omar Faruk",
+    profession: "Online Business Owner",
+    image: "/images/profile-2.webp",
+    review:
+      "Very reliable courier service. Cash on delivery process is smooth and secure for my customers.",
+  },
+  {
+    id: 3,
+    name: "Yusuf Ali",
+    profession: "Fashion Store Owner",
+    image: "/images/profile-3.webp",
+    review:
+      "Fast pickup and professional behavior. Their nationwide delivery helped grow my online business.",
+  },
+  {
+    id: 4,
+    name: "Abdullah Hossain",
+    profession: "SME Entrepreneur",
+    image: "/images/profile-4.webp",
+    review:
+      "I am impressed by their delivery speed and parcel safety. Highly recommended for ecommerce merchants.",
+  },
+  {
+    id: 5,
+    name: "Hasan Mahmud",
+    profession: "Corporate Client",
+    image: "/images/profile-5.webp",
+    review:
+      "Their tracking system and customer support are excellent. Deliveries are always handled professionally.",
+  },
+  {
+    id: 6,
+    name: "Ibrahim Khalid",
+    profession: "Tech Accessories Seller",
+    image: "/images/profile-6.webp",
+    review:
+      "Very smooth service experience. My customers receive products quickly without any hassle.",
+  },
+  {
+    id: 7,
+    name: "Tariq Hasan",
+    profession: "Digital Store Owner",
+    image: "/images/profile-7.webp",
+    review:
+      "Affordable pricing with premium service quality. The delivery team is polite and efficient.",
+  },
+  {
+    id: 8,
+    name: "Saifuddin Karim",
+    profession: "Merchant",
+    image: "/images/profile-8.webp",
+    review:
+      "Their fulfillment and COD service made managing my online orders much easier than before.",
+  },
+  {
+    id: 9,
+    name: "Bilal Uddin",
+    profession: "Electronics Seller",
+    image: "/images/profile-9.webp",
+    review:
+      "Amazing service quality and very fast delivery. I trust them completely for my daily shipments.",
+  },
+  {
+    id: 10,
+    name: "Zayan Ahmed",
+    profession: "Small Business Owner",
+    image: "/images/profile-10.webp",
+    review:
+      "Professional courier service with excellent communication. My business deliveries are now stress free.",
+  },
+];

@@ -84,3 +84,55 @@ body {
   opacity: 0.4;
   animation: lift 3s ease-in-out infinite;
 }
+
+/* .reviewSwiper .swiper-slide {
+  width: 350px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+} */
+.reviewSwiper .swiper-slide-active {
+  opacity: 1;
+}
+.review-pagination {
+  transform: translate(0) !important;
+}
+
+.review-pagination .swiper-pagination-bullet {
+  @apply bg-gray-800;
+}
+.review-pagination .swiper-pagination-bullet-active {
+  @apply bg-lime-500;
+}
+.review-wrapper {
+  position: relative;
+}
+
+.review-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+.review-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .review-wrapper::before {
+    background: linear-gradient(to right, #f3f4f6, transparent);
+  }
+  .review-wrapper::after {
+    background: linear-gradient(to left, #f3f4f6, transparent);
+  }
+}

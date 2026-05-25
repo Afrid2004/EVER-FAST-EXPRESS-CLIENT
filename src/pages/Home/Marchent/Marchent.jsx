@@ -30,9 +30,10 @@ const Marchent = () => {
             <div className="flex items-center justify-center">
               <div className="w-50 h-50 md:w-60 md:h-60 bounce-animate">
                 <img
-                  src="/images/shop (1).png"
+                  src="/images/shop.webp"
                   alt="Marchant"
                   className="w-full"
+                  draggable={false}
                 />
               </div>
             </div>
