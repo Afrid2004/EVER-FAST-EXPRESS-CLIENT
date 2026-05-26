@@ -18,8 +18,8 @@ const Navbar = () => {
       <NavLink to="/coverage">Covarage</NavLink>
       <NavLink to="/about-us">About Us</NavLink>
       <NavLink to="/pricing">Pricing</NavLink>
-      <NavLink to="/blog">Blog</NavLink>
-      <NavLink to="/contact">Contact</NavLink>
+      {/* <NavLink to="/blog">Blog</NavLink> */}
+      {/* <NavLink to="/contact">Contact</NavLink> */}
     </>
   );
 

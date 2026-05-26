@@ -115,6 +115,20 @@ body {
 .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
   z-index: 1;
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease;
+}
 @media (min-width: 768px) {
   .review-wrapper::before {
     background: linear-gradient(to right, #f3f4f6, transparent);

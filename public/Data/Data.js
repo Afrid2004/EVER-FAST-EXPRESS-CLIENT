@@ -151,3 +151,45 @@ export const faqData = [
       "Yes, we provide delivery service all over the country including urban and rural areas.",
   },
 ];
+
+export const aboutData = [
+  {
+    title: "Story",
+    image: "/images/story.webp",
+    desc: "We started with a simple promise — to make parcel delivery fast, reliable, and stress-free. Over the years, our commitment to real-time tracking, efficient logistics, and customer-first service has made us a trusted partner for thousands. Whether it's a personal gift or a time-sensitive business delivery, we ensure it reaches its destination — on time, every time.",
+  },
+  {
+    title: "Mission",
+    image: "/images/mission.webp",
+    desc: "Our mission is to redefine the delivery experience by providing dependable, fast, and technology-driven logistics solutions for everyone. We are committed to ensuring safe parcel handling, transparent communication, and exceptional customer support at every step. By continuously improving our operations and embracing innovation, we aim to help businesses grow and make personal deliveries easier, smoother, and more efficient for people across the country.",
+  },
+  {
+    title: "Success",
+    image: "/images/success.webp",
+    desc: "Through dedication, consistency, and customer trust, we have successfully built a strong delivery network serving thousands of happy customers nationwide. Our growing reach, reliable service, and commitment to timely deliveries have helped us earn recognition in the logistics industry. From supporting small online businesses to handling large-scale shipments, our achievements reflect the hard work of our team and the confidence our clients place in us every day.",
+  },
+  {
+    title: "Team & Others",
+    image: "/images/teamwork.webp",
+    desc: "Behind every successful delivery is a passionate and hardworking team focused on delivering the best experience possible. Our skilled logistics experts, support representatives, and delivery personnel work together to ensure every parcel arrives safely and on time. We believe in teamwork, responsibility, and continuous improvement, which allows us to maintain high service standards while building long-term relationships with customers and business partners alike.",
+  },
+];
+
+export const statsData = [
+  {
+    title: "10K+",
+    desc: "Deliveries",
+  },
+  {
+    title: "5K+",
+    desc: "Happy Customers",
+  },
+  {
+    title: "64",
+    desc: "Districts Covered",
+  },
+  {
+    title: "99%",
+    desc: "On-time Rate",
+  },
+];
