@@ -70,10 +70,15 @@ const Navbar = () => {
         </div>
         {/* Mobile Menus */}
         <div>
-          <div className="flex flex-col gap-3 mobile-menu text-gray-600 mb-3">
+          <div
+            onClick={handleMenuOpen}
+            className="flex flex-col gap-3 mobile-menu text-gray-600 mb-3"
+          >
             {Menus}
           </div>
-          <div className="flex flex-col gap-3">{AuthMenus}</div>
+          <div onClick={handleMenuOpen} className="flex flex-col gap-3">
+            {AuthMenus}
+          </div>
         </div>
       </div>
     </div>
