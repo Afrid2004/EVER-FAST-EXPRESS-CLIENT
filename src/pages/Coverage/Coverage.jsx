@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -20,9 +20,11 @@ const Coverage = () => {
   const locations = useLoaderData();
   const mapRef = useRef(null);
   const position = [23.8103, 90.4125];
+  const [searchResult, setSearchResult] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setSearchResult("");
     const searchValue = e.target.search.value.toLowerCase().trim();
     const district = locations.find(
       (location) => location.district.toLowerCase() === searchValue,
@@ -40,6 +42,7 @@ const Coverage = () => {
       mapRef.current.flyTo(locationPosition, 14, {
         duration: 2,
       });
+      setSearchResult(searchValue);
     } else {
       alert("No location found");
       return;
@@ -88,9 +91,19 @@ const Coverage = () => {
           </div>
 
           <div>
-            <h3 className="font-bold text-3xl text-gray-800 mb-8">
-              We deliver almost all over Bangladesh
-            </h3>
+            <div className="mb-8">
+              <h3 className="font-bold text-3xl text-gray-800">
+                We deliver almost all over Bangladesh
+              </h3>
+              {searchResult && (
+                <p className="mt-3">
+                  Showing Location of:{" "}
+                  <strong className="text-lime-500">
+                    {searchResult.toUpperCase()}
+                  </strong>
+                </p>
+              )}
+            </div>
             <div className="h-125 rounded-2xl overflow-hidden ">
               <MapContainer
                 className="h-full "
