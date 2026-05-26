@@ -28,7 +28,7 @@ const AboutUs = () => {
                 {statsData.map((data, index) => {
                   return (
                     <div key={index}>
-                      <div className="border border-gray-200 rounded-2xl border-b-3 p-5">
+                      <div className="border hover:-translate-y-2 duration-150 bg-white border-gray-200 rounded-2xl border-b-3 p-5">
                         <h2 className="text-4xl font-extrabold text-gray-800 mb-3">
                           {data.title}
                         </h2>
@@ -49,7 +49,7 @@ const AboutUs = () => {
                 <div className="w-full h-30 sm:h-40 lg:h-50 overflow-hidden rounded-2xl">
                   <img
                     src="/images/story.webp"
-                    className="w-full object-cover  h-full hover:scale-110"
+                    className="w-full object-cover duration-200 h-full hover:scale-110"
                     alt="Story"
                   />
                 </div>
