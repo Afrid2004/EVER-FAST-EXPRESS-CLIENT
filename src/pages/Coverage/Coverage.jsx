@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -6,8 +6,34 @@ import { useLoaderData } from "react-router";
 
 const Coverage = () => {
   const locations = useLoaderData();
-  console.log(locations);
+  const mapRef = useRef(null);
   const position = [23.8103, 90.4125];
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchValue = e.target.search.value.toLowerCase().trim();
+    const district = locations.find(
+      (location) => location.district.toLowerCase() === searchValue,
+    );
+    const coveredarea = locations.find((location) =>
+      location.covered_area.some((area) => area.toLowerCase() === searchValue),
+    );
+    const matchedLoaction = district || coveredarea;
+
+    if (matchedLoaction) {
+      let locationPosition = [
+        matchedLoaction.latitude,
+        matchedLoaction.longitude,
+      ];
+      mapRef.current.flyTo(locationPosition, 14, {
+        duration: 2,
+      });
+    } else {
+      alert("No location found");
+      return;
+    }
+  };
+
   return (
     <div>
       <div className="p-10 border border-gray-200 rounded-2xl bg-white">
@@ -17,7 +43,7 @@ const Coverage = () => {
               We are available in 64 districts
             </h2>
             <div>
-              <form>
+              <form onSubmit={handleSearch}>
                 <div className="bg-gray-100 border border-gray-200 h-11 flex items-center justify-between gap-3 w-full max-w-md rounded-4xl overflow-hidden">
                   <div className="h-full shrink-0">
                     <label htmlFor="search">
@@ -37,7 +63,10 @@ const Coverage = () => {
                     />
                   </div>
                   <div className="shrink-0  h-full">
-                    <button className="h-full cursor-pointer bg-lime-400 hover:bg-lime-500 focus:bg-lime-400 duration-75 rounded-4xl px-8">
+                    <button
+                      type="submit"
+                      className="h-full cursor-pointer bg-lime-400 hover:bg-lime-500 focus:bg-lime-400 duration-75 rounded-4xl px-8"
+                    >
                       Search
                     </button>
                   </div>
@@ -56,6 +85,7 @@ const Coverage = () => {
                 center={position}
                 zoom={7}
                 scrollWheelZoom={false}
+                ref={mapRef}
               >
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
