@@ -56,7 +56,7 @@ const Banner = () => {
                           </div>
                         </Link>
                         <Link
-                          to="/login"
+                          to="/bearider"
                           className="bg-gray-100 text-lg font-medium border border-gray-300 px-4 py-2 rounded-xl hover:bg-gray-200 duration-75"
                         >
                           Be A Rider
@@ -103,7 +103,7 @@ const Banner = () => {
                           </div>
                         </Link>
                         <Link
-                          to="/login"
+                          to="/bearider"
                           className="bg-gray-100 text-lg font-medium border border-gray-300 px-4 py-2 rounded-xl hover:bg-gray-200 duration-75"
                         >
                           Be A Rider
@@ -151,7 +151,7 @@ const Banner = () => {
                           </div>
                         </Link>
                         <Link
-                          to="/login"
+                          to="/bearider"
                           className="bg-gray-100 text-lg font-medium border border-gray-300 px-4 py-2 rounded-xl hover:bg-gray-200 duration-75"
                         >
                           Be A Rider

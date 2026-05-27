@@ -7,6 +7,9 @@ import ErrorPage from "../pages/Error/ErrorPage";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
+import PrivateRoute from "./PrivateRoute";
+import BeARider from "../pages/BeARider/BeARider";
+import AuthRoute from "./AuthRoute";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +30,14 @@ export const router = createBrowserRouter([
         path: "about-us",
         element: <AboutUs></AboutUs>,
       },
+      {
+        path: "bearider",
+        element: (
+          <PrivateRoute>
+            <BeARider></BeARider>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -35,11 +46,19 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <Login></Login>,
+        element: (
+          <AuthRoute>
+            <Login></Login>
+          </AuthRoute>
+        ),
       },
       {
         path: "register",
-        element: <Register></Register>,
+        element: (
+          <AuthRoute>
+            <Register></Register>
+          </AuthRoute>
+        ),
       },
     ],
   },

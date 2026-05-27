@@ -2,17 +2,19 @@ import { replace, useFormik } from "formik";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "react-icons/fi";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import * as yup from "yup";
 import useAuth from "../../../Hooks/useAuth";
 import LoadingSpin from "../../../components/Loadings/LoadingSpin";
 
 const Login = () => {
-  const { loading, loginUser, logoutUser, logInWithGoogle, setLoading } =
-    useAuth();
+  const { loginUser, logoutUser, logInWithGoogle } = useAuth();
   const [show, setShow] = useState(false);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const path = location.state?.from?.pathname || "/";
   const handleShow = () => {
     setShow(!show);
   };
@@ -35,7 +37,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     logInWithGoogle()
       .then((result) => {
-        navigate("/", { replace: true });
+        navigate(path, { replace: true });
       })
       .catch((err) => {
         setErr("Google login failed");
@@ -51,6 +53,7 @@ const Login = () => {
 
   const handleFormSubmit = async (values) => {
     setErr("");
+    setLoading(true);
     try {
       const { email, password } = values;
       const result = await loginUser(email, password);
@@ -59,7 +62,7 @@ const Login = () => {
         setErr("Email is not verified! Please verify email first.");
         return false;
       }
-      navigate("/", { replace: true });
+      navigate(path, { replace: true });
       return true;
     } catch (err) {
       if (err.code == "auth/invalid-credential") {

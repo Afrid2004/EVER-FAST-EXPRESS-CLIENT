@@ -3,9 +3,10 @@ import useAuth from "../Hooks/useAuth";
 import LoadingPage from "../components/Loadings/LoadingPage";
 import { Navigate, useLocation } from "react-router";
 
-const PrivateRoute = ({ children }) => {
+const AuthRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
+  console.log(user);
   if (loading) {
     return <LoadingPage />;
   }
@@ -14,9 +15,11 @@ const PrivateRoute = ({ children }) => {
     (p) => p.providerId === "google.com",
   );
   if (user && (user.emailVerified || isGoogleUser)) {
-    return children;
+    return (
+      <Navigate to={location.state?.from?.pathname || "/"} replace></Navigate>
+    );
   }
-  return <Navigate state={{ from: location }} to="/login"></Navigate>;
+  return children;
 };
 
-export default PrivateRoute;
+export default AuthRoute;

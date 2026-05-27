@@ -20,12 +20,10 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
-    setLoading(true);
     return createUserWithEmailAndPassword(Auth, email, password);
   };
 
   const loginUser = async (email, password) => {
-    setLoading(true);
     return signInWithEmailAndPassword(Auth, email, password);
   };
 
@@ -42,14 +40,13 @@ const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
-    setLoading(true);
     return signOut(Auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(Auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
-      return setUser(currentUser);
     });
     return () => {
       unsubscribe();
