@@ -4,9 +4,15 @@ import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "react-icons/fi";
 import { Link } from "react-router";
 import * as yup from "yup";
+import useAuth from "../../../Hooks/useAuth";
+import LoadingSpin from "../../../components/Loadings/LoadingSpin";
 
 const Register = () => {
+  const { loading, createUser, emailVerification, updateUser, logoutUser } =
+    useAuth();
   const [show, setShow] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [err, setErr] = useState("");
   const handleShow = () => {
     setShow(!show);
   };
@@ -31,9 +37,11 @@ const Register = () => {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      const success = await handleFormSubmit(values);
+      if (success) {
+        resetForm();
+      }
     },
   });
 
@@ -43,6 +51,33 @@ const Register = () => {
         <p className="w-full text-center text-sm">{value}</p>
       </div>
     );
+  };
+
+  const handleFormSubmit = async (values) => {
+    setErr("");
+    setSuccess("");
+    try {
+      const { name, email, password } = values;
+      const result = await createUser(email, password);
+      if (!result.user.emailVerified) {
+        await emailVerification();
+      }
+      if (result.user.displayName == null) {
+        await updateUser({ displayName: name });
+      }
+      await logoutUser();
+      setSuccess(
+        "Account created successfully! Please check your email for verification.",
+      );
+      return true;
+    } catch (err) {
+      if (err.code == "auth/email-already-in-use") {
+        setErr("Email already in use. Please try another one.");
+      } else {
+        setErr("Something went wrong. Please try again.");
+      }
+      return false;
+    }
   };
 
   const nameError =
@@ -57,6 +92,7 @@ const Register = () => {
     formik.touched.password &&
     formik.errors.password &&
     errorMessageFunc(formik.errors.password);
+  const authError = err && errorMessageFunc(err);
   return (
     <div className="bg-white p-7 border border-gray-200 w-100 shadow-sm rounded-xl shadow-gray-200">
       <div className="topper flex flex-col items-center justify-center gap-3 mb-5">
@@ -65,21 +101,20 @@ const Register = () => {
           Already have an Account?{" "}
           <Link
             to="/login"
-            className="gradient-text font-medium hover:underline"
+            className="text-lime-600 font-medium hover:underline"
           >
-            Login Now
+            Login
           </Link>
         </p>
       </div>
       <div>
         <form onSubmit={formik.handleSubmit}>
-          {nameError} {emailError} {passError}
-          {/*
-                {success && (
-                  <div className="error w-full my-3 px-4 py-2 rounded-sm bg-green-500/20 text-green-900 border border-green-300/70">
-                    <p className="w-full text-center text-sm">{success}</p>
-                  </div>
-                )} */}
+          {nameError} {emailError} {passError} {authError}
+          {success && (
+            <div className="error w-full my-3 px-4 py-2 rounded-sm bg-green-500/20 text-green-900 border border-green-300/70">
+              <p className="w-full text-center text-sm">{success}</p>
+            </div>
+          )}
           <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden mb-4">
             <label htmlFor="name">
               <div className="h-full flex items-center justify-center bg-gray-200 px-2.5">
@@ -143,10 +178,11 @@ const Register = () => {
           </div>
           <button
             type="submit"
+            disabled={loading}
             className="py-2 px-4 cursor-pointer bg-lime-400 hover:bg-lime-500 duration-75 border border-lime-500/50 focus:bg-lime-400 w-full rounded-md flex items-center justify-center gap-2 mb-3"
           >
             Register
-            {/* {loading && spin} */}
+            {loading && <LoadingSpin />}
           </button>
         </form>
       </div>

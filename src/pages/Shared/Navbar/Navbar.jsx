@@ -3,10 +3,11 @@ import Logo from "../../../components/Logo/Logo";
 import { Link, NavLink } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
 import { IoClose, IoMenu } from "react-icons/io5";
+import useAuth from "../../../Hooks/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { user } = useAuth();
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -31,7 +32,7 @@ const Navbar = () => {
       >
         Login
       </Link>
-      <Link to="/signup" className="flex items-center">
+      <Link to="/register" className="flex items-center">
         <div className="bg-gray-900 text-white lg:text-gray-900 lg:bg-lime-400 font-medium border border-gray-900 lg:border-lime-500/50 px-4 py-2 rounded-xl hover:bg-gray-800 lg:hover:bg-lime-500 duration-75 grow lg:grow-0">
           Signup
         </div>
@@ -39,6 +40,7 @@ const Navbar = () => {
           <FaArrowRight />
         </div>
       </Link>
+      {user && <p>{user.displayName}</p>}
     </>
   );
 
