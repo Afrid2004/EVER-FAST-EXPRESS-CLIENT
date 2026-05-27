@@ -35,7 +35,7 @@ const Navbar = () => {
   const AuthMenus = (
     <>
       {user ? (
-        <>
+        <div className="flex items-center gap-2">
           {/* <p>{user.displayName}</p>{" "} */}
           <div
             className="w-9 h-9 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
@@ -55,7 +55,7 @@ const Navbar = () => {
           >
             Logout
           </button>
-        </>
+        </div>
       ) : (
         <>
           <Link

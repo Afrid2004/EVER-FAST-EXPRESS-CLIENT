@@ -6,7 +6,6 @@ import { Navigate, useLocation } from "react-router";
 const AuthRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
-  console.log(user);
   if (loading) {
     return <LoadingPage />;
   }
