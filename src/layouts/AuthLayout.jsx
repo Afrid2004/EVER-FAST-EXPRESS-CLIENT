@@ -5,9 +5,9 @@ import { Outlet } from "react-router";
 const AuthLayout = () => {
   return (
     <div className="bg-white h-screen overflow-auto">
-      <div className="grid grid-cols-2 h-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
         <div className="p-5 h-full flex flex-col gap-5">
-          <div>
+          <div className="mx-auto">
             <Logo size={"w-25"}></Logo>
           </div>
           <div className="flex items-center justify-center h-full">
@@ -16,7 +16,7 @@ const AuthLayout = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="hidden lg:block">
           <div className="bg-lime-50 h-full flex items-center justify-center">
             <div className="w-70">
               <img

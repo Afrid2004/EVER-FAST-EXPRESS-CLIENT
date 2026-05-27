@@ -114,10 +114,10 @@ const Register = () => {
     errorMessageFunc(formik.errors.password);
   const authError = err && errorMessageFunc(err);
   return (
-    <div className="bg-white p-7 border border-gray-200 w-100 shadow-sm rounded-xl shadow-gray-200">
+    <div className="bg-white p-7 border border-gray-200 w-full sm:w-100 shadow-sm rounded-xl shadow-gray-200">
       <div className="topper flex flex-col items-center justify-center gap-3 mb-5">
         <h2 className="font-bold text-2xl">Register</h2>
-        <p>
+        <p className="text-center">
           Already have an Account?{" "}
           <Link
             to="/login"
