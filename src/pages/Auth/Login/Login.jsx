@@ -8,7 +8,8 @@ import useAuth from "../../../Hooks/useAuth";
 import LoadingSpin from "../../../components/Loadings/LoadingSpin";
 
 const Login = () => {
-  const { loading, loginUser, logoutUser } = useAuth();
+  const { loading, loginUser, logoutUser, logInWithGoogle, setLoading } =
+    useAuth();
   const [show, setShow] = useState(false);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
@@ -31,7 +32,15 @@ const Login = () => {
       }
     },
   });
-
+  const handleGoogleLogin = () => {
+    logInWithGoogle()
+      .then((result) => {
+        navigate("/", { replace: true });
+      })
+      .catch((err) => {
+        setErr("Google login failed");
+      });
+  };
   const errorMessageFunc = (value) => {
     return (
       <div className="error w-full mb-3 px-4 py-2 rounded-sm bg-red-200/70 text-red-900 border border-red-300/50">
@@ -50,7 +59,6 @@ const Login = () => {
         setErr("Email is not verified! Please verify email first.");
         return false;
       }
-      console.log(result.user);
       navigate("/", { replace: true });
       return true;
     } catch (err) {
@@ -60,6 +68,8 @@ const Login = () => {
         setErr(err.code);
       }
       return false;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -152,7 +162,7 @@ const Login = () => {
         </div>
 
         <button
-          // onClick={handleGoogle}
+          onClick={handleGoogleLogin}
           className="py-2 px-4 cursor-pointer border border-gray-200/70 w-full rounded-md bg-gray-200/80 hover:bg-gray-300/70 duration-75 flex  items-center justify-center gap-2"
         >
           <FcGoogle size={18} />

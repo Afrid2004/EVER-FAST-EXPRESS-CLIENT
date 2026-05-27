@@ -6,7 +6,6 @@ import LoadingPage from "../components/Loadings/LoadingPage";
 
 const RootLayout = () => {
   const navigateState = useNavigation();
-  console.log(navigateState);
   return (
     <>
       <Navbar></Navbar>

@@ -1,22 +1,30 @@
 import React, { useState } from "react";
 import Logo from "../../../components/Logo/Logo";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
 import { IoClose, IoMenu } from "react-icons/io5";
 import useAuth from "../../../Hooks/useAuth";
+import Avatar from "../../../components/Avatar/Avatar";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, logoutUser } = useAuth();
+  const navigate = useNavigate();
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = async () => {
+    await logoutUser().then(() => {
+      navigate("/login", { replace: true });
+    });
   };
 
   const Menus = (
     <>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/services">Services</NavLink>
-      <NavLink to="/coverage">Covarage</NavLink>
+      <NavLink to="/coverage">Coverage</NavLink>
       <NavLink to="/about-us">About Us</NavLink>
       <NavLink to="/pricing">Pricing</NavLink>
       {/* <NavLink to="/blog">Blog</NavLink> */}
@@ -26,21 +34,46 @@ const Navbar = () => {
 
   const AuthMenus = (
     <>
-      <Link
-        to="/login"
-        className="bg-gray-100 font-medium border border-gray-200 px-4 py-2 rounded-xl hover:bg-gray-200 duration-75"
-      >
-        Login
-      </Link>
-      <Link to="/register" className="flex items-center">
-        <div className="bg-gray-900 text-white lg:text-gray-900 lg:bg-lime-400 font-medium border border-gray-900 lg:border-lime-500/50 px-4 py-2 rounded-xl hover:bg-gray-800 lg:hover:bg-lime-500 duration-75 grow lg:grow-0">
-          Signup
-        </div>
-        <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white lg:text-lime-300 hover:bg-gray-800 -rotate-45">
-          <FaArrowRight />
-        </div>
-      </Link>
-      {user && <p>{user.displayName}</p>}
+      {user ? (
+        <>
+          {/* <p>{user.displayName}</p>{" "} */}
+          <div
+            className="w-9 h-9 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
+            title={user?.displayName}
+          >
+            <Avatar />
+          </div>
+          <Link
+            to="/bearider"
+            className="bg-lime-400 text-sm font-medium border border-lime-500/50 px-3 py-2 rounded-xl hover:bg-lime-500 duration-75"
+          >
+            Be A Rider
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="bg-gray-100 text-sm font-medium border border-gray-200 px-3 py-2 cursor-pointer rounded-xl hover:bg-gray-200 duration-75"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link
+            to="/login"
+            className="bg-gray-100 font-medium border border-gray-200 px-4 py-2 rounded-xl hover:bg-gray-200 duration-75"
+          >
+            Login
+          </Link>
+          <Link to="/register" className="flex items-center">
+            <div className="bg-gray-900 text-white lg:text-gray-900 lg:bg-lime-400 font-medium border border-gray-900 lg:border-lime-500/50 px-4 py-2 rounded-xl hover:bg-gray-800 lg:hover:bg-lime-500 duration-75 grow lg:grow-0">
+              Signup
+            </div>
+            <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white lg:text-lime-300 hover:bg-gray-800 -rotate-45">
+              <FaArrowRight />
+            </div>
+          </Link>
+        </>
+      )}
     </>
   );
 

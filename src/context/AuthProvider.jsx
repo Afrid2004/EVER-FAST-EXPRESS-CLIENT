@@ -3,9 +3,11 @@ import { Auth } from "../Firebase/Firebase.config";
 import { createContext } from "react";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -14,30 +16,21 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const googleProvider = new GoogleAuthProvider();
 
-  const createUser = async (email, password) => {
+  const createUser = (email, password) => {
     setLoading(true);
-    try {
-      const result = await createUserWithEmailAndPassword(
-        Auth,
-        email,
-        password,
-      );
-      return result;
-    } finally {
-      setLoading(false);
-    }
+    return createUserWithEmailAndPassword(Auth, email, password);
   };
 
   const loginUser = async (email, password) => {
     setLoading(true);
-    try {
-      const result = await signInWithEmailAndPassword(Auth, email, password);
-      return result;
-    } finally {
-      setLoading(false);
-    }
+    return signInWithEmailAndPassword(Auth, email, password);
+  };
+
+  const logInWithGoogle = () => {
+    return signInWithPopup(Auth, googleProvider);
   };
 
   const updateUser = (data) => {
@@ -49,6 +42,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    setLoading(true);
     return signOut(Auth);
   };
 
@@ -56,19 +50,21 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(Auth, (currentUser) => {
       setLoading(false);
       return setUser(currentUser);
-      return () => {
-        unsubscribe();
-      };
     });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const authInfo = {
     user,
     createUser,
     loginUser,
+    logInWithGoogle,
     logoutUser,
     updateUser,
     loading,
+    setLoading,
     emailVerification,
   };
   return (

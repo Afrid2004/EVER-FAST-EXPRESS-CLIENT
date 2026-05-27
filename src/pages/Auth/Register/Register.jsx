@@ -2,17 +2,25 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "react-icons/fi";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import * as yup from "yup";
 import useAuth from "../../../Hooks/useAuth";
 import LoadingSpin from "../../../components/Loadings/LoadingSpin";
 
 const Register = () => {
-  const { loading, createUser, emailVerification, updateUser, logoutUser } =
-    useAuth();
+  const {
+    loading,
+    createUser,
+    emailVerification,
+    updateUser,
+    logoutUser,
+    logInWithGoogle,
+    setLoading,
+  } = useAuth();
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [err, setErr] = useState("");
+  const navigate = useNavigate();
   const handleShow = () => {
     setShow(!show);
   };
@@ -44,6 +52,16 @@ const Register = () => {
       }
     },
   });
+
+  const handleGoogleLogin = () => {
+    logInWithGoogle()
+      .then((result) => {
+        navigate("/", { replace: true });
+      })
+      .catch((err) => {
+        setErr("Google login failed");
+      });
+  };
 
   const errorMessageFunc = (value) => {
     return (
@@ -77,6 +95,8 @@ const Register = () => {
         setErr("Something went wrong. Please try again.");
       }
       return false;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -194,7 +214,7 @@ const Register = () => {
         </div>
 
         <button
-          // onClick={handleGoogle}
+          onClick={handleGoogleLogin}
           className="py-2 px-4 cursor-pointer border border-gray-200/70 w-full rounded-md bg-gray-200/80 hover:bg-gray-300/70 duration-75 flex  items-center justify-center gap-2"
         >
           <FcGoogle size={18} />
