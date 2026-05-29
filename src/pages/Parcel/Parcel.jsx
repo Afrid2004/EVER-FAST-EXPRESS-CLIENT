@@ -34,7 +34,6 @@ const Parcel = () => {
       type: "Document",
       parcelname: "",
       parcelweight: "",
-
       sendername: user?.displayName || "",
       senderemail: user?.email || "",
       senderphone: "",
@@ -42,7 +41,6 @@ const Parcel = () => {
       senderregion: "",
       senderdistrict: "",
       pickupinstruction: "",
-
       receivername: "",
       receiveremail: "",
       receiverphone: "",
@@ -50,11 +48,77 @@ const Parcel = () => {
       receiverregion: "",
       receiverdistrict: "",
       deliveryinstruction: "",
+      sendingtime: new Date().toISOString(),
     },
+    validationSchema: yup.object({
+      type: yup.string().required(),
+      parcelname: yup
+        .string()
+        .min(2, "Parcel name must be at least 2 characters.")
+        .required("Parcel name is required"),
+      parcelweight: yup
+        .number("Parcel weight must be a number")
+        .positive("Weight must be positive")
+        .required("Parcel weight is required"),
+      sendername: yup
+        .string()
+        .min(2, "Sender name must be at least 2 characters")
+        .required("Sender name is required"),
+      senderemail: yup
+        .string()
+        .email("Invalid email")
+        .required("Sender email is required"),
+      senderphone: yup
+        .number()
+        .min(2, "Sender phone number must be at least 2 digits.")
+        .required("Sender phone is required"),
+      senderaddress: yup
+        .string()
+        .min(2, "Sender address must be at least 2 charecters.")
+        .required("Sender address is required"),
+      senderregion: yup.string().required("Sender region is required"),
+      senderdistrict: yup.string().required("Sender district is required"),
+      pickupinstruction: yup.string().nullable(),
+      receivername: yup
+        .string()
+        .min(2, "Receiver name must be at least 2 characters")
+        .required("Receiver name is required"),
+      receiveremail: yup
+        .string()
+        .email("Invalid email")
+        .required("Receiver email is required"),
+      receiverphone: yup
+        .number()
+        .min(2, "Receiver phone number must be at least 2 digits.")
+        .required("Receiver phone is required"),
+      receiveraddress: yup
+        .string()
+        .min(2, "Receiver address must be at least 2 charecters.")
+        .required("Receiver address is required"),
+      receiverregion: yup.string().required("Receiver region is required"),
+      receiverdistrict: yup.string().required("Receiver district is required"),
+      deliveryinstruction: yup.string().nullable(),
+    }),
     onSubmit: (values) => {
       console.log(values);
     },
   });
+
+  const errorMessageFunc = (value) => {
+    return (
+      <div className="error w-full px-4 py-2 rounded-sm bg-red-200/70 text-red-900 border border-red-300/50">
+        <p className="w-full text-center text-sm">{value}</p>
+      </div>
+    );
+  };
+
+  const getError = (fieldName) => {
+    return formik.touched[fieldName] && formik.errors[fieldName]
+      ? errorMessageFunc(formik.errors[fieldName])
+      : null;
+  };
+
+  //errors
 
   return (
     <div>
@@ -114,7 +178,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="text"
                       name="parcelname"
                       id="parcelname"
@@ -124,6 +187,9 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("parcelname") && (
+                    <div className="my-3">{getError("parcelname")}</div>
+                  )}
                 </div>
                 <div className="col-span-12 md:col-span-6">
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
@@ -133,7 +199,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="number"
                       name="parcelweight"
                       id="parcelweight"
@@ -143,6 +208,9 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("parcelweight") && (
+                    <div className="my-3">{getError("parcelweight")}</div>
+                  )}
                 </div>
               </div>
             </div>
@@ -162,7 +230,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="text"
                       name="sendername"
                       id="sendername"
@@ -172,6 +239,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("sendername")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="senderemail">
                       <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
@@ -179,7 +247,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="text"
                       name="senderemail"
                       id="senderemail"
@@ -189,6 +256,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("senderemail")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="senderphone">
                       <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
@@ -196,7 +264,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="tel"
                       name="senderphone"
                       id="senderphone"
@@ -206,6 +273,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("senderphone")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="senderaddress">
                       <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
@@ -213,7 +281,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="tel"
                       name="senderaddress"
                       id="senderaddress"
@@ -223,6 +290,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("senderaddress")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="senderregion">
                       <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
@@ -250,6 +318,7 @@ const Parcel = () => {
                       ))}
                     </select>
                   </div>
+                  {getError("senderregion")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="senderdistrict">
                       <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
@@ -277,6 +346,7 @@ const Parcel = () => {
                       ))}
                     </select>
                   </div>
+                  {getError("senderdistrict")}
                   <div className="flex border border-gray-300/70 h-20 rounded-sm overflow-hidden">
                     <textarea
                       name="pickupinstruction"
@@ -301,7 +371,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="text"
                       name="receivername"
                       id="receivername"
@@ -311,6 +380,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("receivername")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="receiveremail">
                       <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
@@ -318,7 +388,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="text"
                       name="receiveremail"
                       id="receiveremail"
@@ -328,6 +397,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("receiveremail")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="receiverphone">
                       <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
@@ -335,7 +405,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="tel"
                       name="receiverphone"
                       id="receiverphone"
@@ -345,6 +414,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("receiverphone")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="receiveraddress">
                       <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
@@ -352,7 +422,6 @@ const Parcel = () => {
                       </div>
                     </label>
                     <input
-                      required
                       type="text"
                       name="receiveraddress"
                       onChange={formik.handleChange}
@@ -362,6 +431,7 @@ const Parcel = () => {
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
+                  {getError("receiveraddress")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="receiverregion">
                       <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
@@ -388,6 +458,7 @@ const Parcel = () => {
                       ))}
                     </select>
                   </div>
+                  {getError("receiverregion")}
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
                     <label htmlFor="receiverdistrict">
                       <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
@@ -417,6 +488,7 @@ const Parcel = () => {
                       ))}
                     </select>
                   </div>
+                  {getError("receiverdistrict")}
                   <div className="flex border border-gray-300/70 h-20 rounded-sm overflow-hidden">
                     <textarea
                       name="deliveryinstruction"
