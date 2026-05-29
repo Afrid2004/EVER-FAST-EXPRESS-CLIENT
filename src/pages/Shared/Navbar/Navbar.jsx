@@ -23,7 +23,7 @@ const Navbar = () => {
   const Menus = (
     <>
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/services">Services</NavLink>
+      <NavLink to="/parcel">Send Parcel</NavLink>
       <NavLink to="/coverage">Coverage</NavLink>
       <NavLink to="/about-us">About Us</NavLink>
       <NavLink to="/pricing">Pricing</NavLink>
@@ -44,7 +44,7 @@ const Navbar = () => {
             <Avatar />
           </div>
           <Link
-            to="/bearider"
+            to="/rider"
             className="bg-lime-400 text-sm font-medium border border-lime-500/50 px-3 py-2 rounded-xl hover:bg-lime-500 duration-75"
           >
             Be A Rider

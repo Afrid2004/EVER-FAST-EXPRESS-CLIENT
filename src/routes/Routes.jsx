@@ -8,8 +8,9 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import PrivateRoute from "./PrivateRoute";
-import BeARider from "../pages/BeARider/BeARider";
+import Rider from "../pages/Rider/Rider";
 import AuthRoute from "./AuthRoute";
+import Parcel from "../pages/Parcel/Parcel";
 
 export const router = createBrowserRouter([
   {
@@ -31,10 +32,18 @@ export const router = createBrowserRouter([
         element: <AboutUs></AboutUs>,
       },
       {
-        path: "bearider",
+        path: "rider",
         element: (
           <PrivateRoute>
-            <BeARider></BeARider>
+            <Rider></Rider>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "parcel",
+        element: (
+          <PrivateRoute>
+            <Parcel></Parcel>
           </PrivateRoute>
         ),
       },
