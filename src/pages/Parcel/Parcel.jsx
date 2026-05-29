@@ -1,12 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsBox } from "react-icons/bs";
-import { FiMapPin, FiPhone, FiUser } from "react-icons/fi";
+import { FiMail, FiMapPin, FiPhone, FiUser } from "react-icons/fi";
 import { LuMapPinned, LuWeight } from "react-icons/lu";
 import useAuth from "../../Hooks/useAuth";
 import { FaArrowRight } from "react-icons/fa";
+import { useLoaderData } from "react-router";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 const Parcel = () => {
   const { user } = useAuth();
+  const locations = useLoaderData();
+  const duplicateRegions = locations.map((loc) => loc.region);
+  //remove duplicate and set comomon regions
+  const regions = [...new Set(duplicateRegions)];
+  const [senderDistricts, setSenderDistricts] = useState([]);
+  const [receiverDistricts, setReceiverDistricts] = useState([]);
+
+  const handleSenderDistrict = (region) => {
+    const districts = locations.filter((loc) => loc.region === region);
+    const district = districts.map((d) => d.district);
+    setSenderDistricts(district);
+  };
+
+  const handleReceiverDistrict = (region) => {
+    const districts = locations.filter((loc) => loc.region === region);
+    const district = districts.map((d) => d.district);
+    setReceiverDistricts(district);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      type: "Document",
+      parcelname: "",
+      parcelweight: "",
+
+      sendername: user?.displayName || "",
+      senderemail: user?.email || "",
+      senderphone: "",
+      senderaddress: "",
+      senderregion: "",
+      senderdistrict: "",
+      pickupinstruction: "",
+
+      receivername: "",
+      receiveremail: "",
+      receiverphone: "",
+      receiveraddress: "",
+      receiverregion: "",
+      receiverdistrict: "",
+      deliveryinstruction: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
     <div>
       <div className="bg-white p-8 md:p-10 border border-gray-200 rounded-2xl">
@@ -19,36 +68,39 @@ const Parcel = () => {
           </p>
         </div>
         <div>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             {/* document or not field, parcel name or weight */}
             <div className="border-y border-gray-200 py-6 mb-4">
               <div className="grid grid-cols-12 gap-5">
                 <div className="col-span-12">
                   <div className="flex gap-3 flex-wrap">
                     <label
-                      for="document"
+                      htmlFor="document"
                       className="flex duration-150 transition-all md:justify-between items-center gap-3 rounded-sm px-2.5 h-10 ring-1 ring-gray-300/70 text-gray-600  hover:bg-gray-100 has-checked:text-lime-500 has-checked:ring-lime-500 shrink-0 w-full md:w-fit cursor-pointer"
                     >
                       <input
                         id="document"
                         className="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding ring-1 ring-lime-950/20 duration-150 transition-all outline-none checked:border-lime-500 checked:ring-lime-500"
                         type="radio"
+                        onChange={formik.handleChange}
+                        checked={formik.values.type === "Document"}
                         value="Document"
-                        name="parcelCondition"
-                        defaultChecked
+                        name="type"
                       />
                       Document
                     </label>
                     <label
-                      for="nondocument"
+                      htmlFor="nondocument"
                       className="flex duration-150 transition-all md:justify-between items-center gap-3 rounded-sm px-2.5 h-10 ring-1 ring-gray-300/70 text-gray-600  hover:bg-gray-100 has-checked:text-lime-500 has-checked:ring-lime-500 shrink-0 w-full md:w-fit cursor-pointer"
                     >
                       <input
                         id="nondocument"
                         className="box-content duration-150 transition-all h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding ring-1 ring-lime-950/20 outline-none checked:border-lime-500 checked:ring-lime-500"
                         type="radio"
-                        value="Non Document"
-                        name="parcelCondition"
+                        value="nondocument"
+                        onChange={formik.handleChange}
+                        checked={formik.values.type === "nondocument"}
+                        name="type"
                       />
                       Non Document
                     </label>
@@ -66,6 +118,8 @@ const Parcel = () => {
                       type="text"
                       name="parcelname"
                       id="parcelname"
+                      onChange={formik.handleChange}
+                      value={formik.values.parcelname}
                       placeholder="Parcel Name"
                       className="outline-none w-full px-2.5 h-full"
                     />
@@ -83,6 +137,8 @@ const Parcel = () => {
                       type="number"
                       name="parcelweight"
                       id="parcelweight"
+                      onChange={formik.handleChange}
+                      value={formik.values.parcelweight}
                       placeholder="Parcel Weight (KG)"
                       className="outline-none w-full px-2.5 h-full"
                     />
@@ -111,7 +167,25 @@ const Parcel = () => {
                       name="sendername"
                       id="sendername"
                       placeholder="Sender Name"
-                      defaultValue={user?.displayName}
+                      onChange={formik.handleChange}
+                      value={formik.values.sendername}
+                      className="outline-none w-full px-2.5 h-full"
+                    />
+                  </div>
+                  <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
+                    <label htmlFor="senderemail">
+                      <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
+                        <FiMail className="shrink-0" />
+                      </div>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="senderemail"
+                      id="senderemail"
+                      placeholder="Sender Email"
+                      onChange={formik.handleChange}
+                      value={formik.values.senderemail}
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
@@ -126,6 +200,8 @@ const Parcel = () => {
                       type="tel"
                       name="senderphone"
                       id="senderphone"
+                      onChange={formik.handleChange}
+                      value={formik.values.senderphone}
                       placeholder="Sender Phone"
                       className="outline-none w-full px-2.5 h-full"
                     />
@@ -141,37 +217,74 @@ const Parcel = () => {
                       type="tel"
                       name="senderaddress"
                       id="senderaddress"
+                      onChange={formik.handleChange}
+                      value={formik.values.senderaddress}
                       placeholder="Sender Address"
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
-                    <label htmlFor="district">
+                    <label htmlFor="senderregion">
                       <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
-                        <LuMapPinned className="w-5 shrink-0" />
+                        <LuMapPinned className="shrink-0" />
                       </div>
                     </label>
                     <select
-                      required
-                      name="district"
-                      className="w-full outline-none px-1"
-                      id="district"
+                      id="senderregion"
+                      name="senderregion"
+                      defaultValue="Pick a Region"
+                      className="select outline-0 border-0 w-full"
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        handleSenderDistrict(e.target.value);
+                      }}
+                      value={formik.values.senderregion}
                     >
-                      <option selected disabled value="">
-                        Select Your District
+                      <option selected={true} value="" disabled={true}>
+                        Pick a Region
                       </option>
-                      <option value="Feni">Feni</option>
-                      <option value="Dhaka">Dhaka</option>
-                      <option value="Chattogram">Chattogram</option>
-                      <option value="Chandpur">Chandpur</option>
+                      {regions.map((region, i) => (
+                        <option key={i} value={region}>
+                          {region}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
+                    <label htmlFor="senderdistrict">
+                      <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
+                        <LuMapPinned className="shrink-0" />
+                      </div>
+                    </label>
+                    <select
+                      id="senderdistrict"
+                      name="senderdistrict"
+                      title={
+                        senderDistricts.length === 0 && "Select a region first"
+                      }
+                      disabled={senderDistricts.length === 0}
+                      onChange={formik.handleChange}
+                      value={formik.values.senderdistrict}
+                      className="select outline-0 border-0 w-full"
+                    >
+                      <option selected={true} value="" disabled={true}>
+                        Pick a District
+                      </option>
+                      {senderDistricts.map((district, i) => (
+                        <option key={i} value={district}>
+                          {district}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="flex border border-gray-300/70 h-20 rounded-sm overflow-hidden">
                     <textarea
-                      name="senderaddress"
-                      id="senderaddress"
+                      name="pickupinstruction"
+                      id="pickupinstruction"
                       placeholder="Pickup Instruction"
                       className="outline-none w-full p-2.5 h-full"
+                      onChange={formik.handleChange}
+                      value={formik.values.pickupinstruction}
                     ></textarea>
                   </div>
                 </div>
@@ -193,6 +306,25 @@ const Parcel = () => {
                       name="receivername"
                       id="receivername"
                       placeholder="Receiver Name"
+                      onChange={formik.handleChange}
+                      value={formik.values.receivername}
+                      className="outline-none w-full px-2.5 h-full"
+                    />
+                  </div>
+                  <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
+                    <label htmlFor="receiveremail">
+                      <div className="h-full flex items-center justify-center bg-gray-200 px-2.5 text-gray-700">
+                        <FiMail className="shrink-0" />
+                      </div>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="receiveremail"
+                      id="receiveremail"
+                      placeholder="Receiver Email"
+                      onChange={formik.handleChange}
+                      value={formik.values.receiveremail}
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
@@ -208,6 +340,8 @@ const Parcel = () => {
                       name="receiverphone"
                       id="receiverphone"
                       placeholder="Receiver Phone"
+                      onChange={formik.handleChange}
+                      value={formik.values.receiverphone}
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
@@ -219,39 +353,77 @@ const Parcel = () => {
                     </label>
                     <input
                       required
-                      type="tel"
+                      type="text"
                       name="receiveraddress"
+                      onChange={formik.handleChange}
+                      value={formik.values.receiveraddress}
                       id="receiveraddress"
                       placeholder="Receiver Address"
                       className="outline-none w-full px-2.5 h-full"
                     />
                   </div>
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
-                    <label html="receiverdistrict">
+                    <label htmlFor="receiverregion">
                       <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
-                        <LuMapPinned className="w-5 shrink-0" />
+                        <LuMapPinned className="shrink-0" />
                       </div>
                     </label>
                     <select
-                      required
-                      id="receiverdistrict"
-                      className="w-full outline-none px-1"
-                      name="receiverdistrict"
+                      id="receiverregion"
+                      name="receiverregion"
+                      className="select outline-0 border-0 w-full"
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        handleReceiverDistrict(e.target.value);
+                      }}
+                      value={formik.values.receiverregion}
                     >
-                      <option selected disabled value="">
-                        Select Receiver District
+                      <option selected={true} value="" disabled={true}>
+                        Pick a Receiver Region
                       </option>
-                      <option value="Feni">Feni</option>
-                      <option value="Dhaka">Dhaka</option>
-                      <option value="Chattogram">Chattogram</option>
-                      <option value="Chandpur">Chandpur</option>
+                      {regions.map((region, i) => (
+                        <option key={i} value={region}>
+                          {region}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
+                    <label htmlFor="receiverdistrict">
+                      <div className="h-full flex items-center justify-center bg-gray-200 text-gray-700 px-2.5">
+                        <LuMapPinned className="shrink-0" />
+                      </div>
+                    </label>
+                    <select
+                      id="receiverdistrict"
+                      name="receiverdistrict"
+                      defaultValue="Pick a Receiver District"
+                      title={
+                        receiverDistricts.length === 0 &&
+                        "Select a region first"
+                      }
+                      disabled={receiverDistricts.length === 0}
+                      onChange={formik.handleChange}
+                      value={formik.values.receiverdistrict}
+                      className="select outline-0 border-0 w-full"
+                    >
+                      <option selected={true} value="" disabled={true}>
+                        Pick a Receiver District
+                      </option>
+                      {receiverDistricts.map((district, i) => (
+                        <option key={i} value={district}>
+                          {district}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="flex border border-gray-300/70 h-20 rounded-sm overflow-hidden">
                     <textarea
-                      name="receiveraddress"
-                      id="receiveraddress"
+                      name="deliveryinstruction"
+                      id="deliveryinstruction"
                       placeholder="Delivery Instruction"
+                      onChange={formik.handleChange}
+                      value={formik.values.deliveryinstruction}
                       className="outline-none w-full p-2.5 h-full"
                     ></textarea>
                   </div>
@@ -265,8 +437,8 @@ const Parcel = () => {
                 * PickUp Time 4pm-7pm Approx.
               </p>
               <button
-                type="submit shrink-0"
-                className="px-4 py-2 bg-lime-400 border border-lime-500/50 hover:bg-lime-500 duration-100 rounded-xl text-gray-800 flex items-center gap-2 cursor-pointer"
+                type="submit"
+                className="px-4 shrink-0 py-2 bg-lime-400 border border-lime-500/50 hover:bg-lime-500 duration-100 rounded-xl text-gray-800 flex items-center gap-2 cursor-pointer"
               >
                 Proceed to Confirm Booking{" "}
                 <FaArrowRight className="w-5 shrink-0" />

@@ -46,6 +46,7 @@ export const router = createBrowserRouter([
             <Parcel></Parcel>
           </PrivateRoute>
         ),
+        loader: () => fetch("/Data/locations.json").then((res) => res.json()),
       },
     ],
   },
