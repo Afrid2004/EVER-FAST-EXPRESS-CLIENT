@@ -5,19 +5,15 @@ import { FaArrowRight } from "react-icons/fa";
 import { IoClose, IoMenu } from "react-icons/io5";
 import useAuth from "../../../Hooks/useAuth";
 import Avatar from "../../../components/Avatar/Avatar";
+import { useLogout } from "../../../Hooks/useLogout";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, logoutUser } = useAuth();
+  const { user } = useAuth();
+  const logout = useLogout();
   const navigate = useNavigate();
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLogout = async () => {
-    await logoutUser().then(() => {
-      navigate("/login", { replace: true });
-    });
   };
 
   const Menus = (
@@ -37,24 +33,47 @@ const Navbar = () => {
       {user ? (
         <div className="flex items-center gap-2">
           {/* <p>{user.displayName}</p>{" "} */}
-          <div
-            className="w-9 h-9 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
-            title={user?.displayName}
-          >
-            <Avatar />
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button">
+              <div
+                className="w-9 h-9 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
+                title={user?.displayName}
+              >
+                <Avatar />
+              </div>
+            </div>
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu border border-gray-200 flex flex-col gap-2 bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+                <Link
+                  to="/rider"
+                  className="bg-lime-400 text-sm font-medium border border-lime-500/50 px-3 py-2 rounded-lg hover:bg-lime-500 duration-75"
+                >
+                  Be a Rider
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/dashboard"
+                  className="bg-gray-100 text-sm  font-medium border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
+                >
+                  Dashboard
+                </Link>
+              </li>
+
+              <li>
+                <button
+                  onClick={logout}
+                  className="bg-gray-100 text-sm  font-medium border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
           </div>
-          <Link
-            to="/rider"
-            className="bg-lime-400 text-sm font-medium border border-lime-500/50 px-3 py-2 rounded-xl hover:bg-lime-500 duration-75"
-          >
-            Be A Rider
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="bg-gray-100 text-sm font-medium border border-gray-200 px-3 py-2 cursor-pointer rounded-xl hover:bg-gray-200 duration-75"
-          >
-            Logout
-          </button>
         </div>
       ) : (
         <>
@@ -111,9 +130,7 @@ const Navbar = () => {
           >
             {Menus}
           </div>
-          <div onClick={handleMenuOpen} className="flex flex-col gap-3">
-            {AuthMenus}
-          </div>
+          <div className="flex flex-col gap-3">{AuthMenus}</div>
         </div>
       </div>
     </div>

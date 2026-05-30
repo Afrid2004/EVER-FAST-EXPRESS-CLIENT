@@ -1,5 +1,7 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default;
+}
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
@@ -24,6 +26,10 @@ body {
 
 .mobile-menu > a {
   @apply bg-gray-200/50 px-4 py-2 border border-gray-200 rounded-lg hover:bg-lime-400 hover:border-lime-500/50 duration-75;
+}
+
+.dashboard-link .active {
+  @apply bg-lime-400 hover:bg-lime-500 duration-150;
 }
 
 .gradient-dark-text {

@@ -7,10 +7,13 @@ import { FaArrowRight } from "react-icons/fa";
 import { useLoaderData } from "react-router";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Swal from "sweetalert2";
+import useAxios from "../../Hooks/AxiosHook";
 
 const Parcel = () => {
   const { user } = useAuth();
   const locations = useLoaderData();
+  const axiosInstance = useAxios();
   const duplicateRegions = locations.map((loc) => loc.region);
   //remove duplicate and set comomon regions
   const regions = [...new Set(duplicateRegions)];
@@ -36,6 +39,7 @@ const Parcel = () => {
       parcelweight: "",
       sendername: user?.displayName || "",
       senderemail: user?.email || "",
+      senderuid: user?.uid || "",
       senderphone: "",
       senderaddress: "",
       senderregion: "",
@@ -48,7 +52,7 @@ const Parcel = () => {
       receiverregion: "",
       receiverdistrict: "",
       deliveryinstruction: "",
-      sendingtime: new Date().toISOString(),
+      createdAt: new Date(),
     },
     validationSchema: yup.object({
       type: yup.string().required(),
@@ -100,9 +104,57 @@ const Parcel = () => {
       deliveryinstruction: yup.string().nullable(),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      handleSendPercel(values);
     },
   });
+
+  const handleSendPercel = (parceldata) => {
+    const isSameCity =
+      parceldata.senderdistrict === parceldata.receiverdistrict;
+    const isDocument = parceldata.type.toLowerCase() === "document";
+    const parcelWeight = parseFloat(parceldata.parcelweight);
+    let cost = 0;
+    if (isDocument) {
+      cost = isSameCity ? 60 : 80;
+    } else {
+      if (parcelWeight < 3) {
+        cost = isSameCity ? 110 : 150;
+      } else {
+        const mincharge = isSameCity ? 110 : 150;
+        const extraWeight = parcelWeight - 3;
+        const extraCharge = isSameCity ? extraWeight * 40 : extraWeight * 80;
+        cost = mincharge + extraCharge;
+      }
+    }
+
+    Swal.fire({
+      title: "Are you agree with the cost?",
+      text: `You have to pay ${cost}tk!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#7ccf00",
+      cancelButtonColor: "#1e2939",
+      confirmButtonText: "Yes, I Agree!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance.post("/parcels", { ...parceldata, cost }).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "Submitted!",
+              text: "Your parcel has been submitted.",
+              icon: "success",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Failed!",
+              text: "Failed to submit your parcel. Please try again later.",
+            });
+          }
+        });
+      }
+    });
+  };
 
   const errorMessageFunc = (value) => {
     return (
@@ -134,7 +186,7 @@ const Parcel = () => {
         <div>
           <form onSubmit={formik.handleSubmit}>
             {/* document or not field, parcel name or weight */}
-            <div className="border-y border-gray-200 py-6 mb-4">
+            <div className="border-y bg-gra border-gray-200 py-6 mb-4">
               <div className="grid grid-cols-12 gap-5">
                 <div className="col-span-12">
                   <div className="flex gap-3 flex-wrap">
