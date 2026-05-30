@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 
 const MyParcels = () => {
   const { user } = useAuth();
-  console.log(user.uid);
   const axiosInstance = useAxios();
   const {
     data: parcels = [],
@@ -91,7 +90,7 @@ const MyParcels = () => {
                       {parcel.paymentStatus === "paid" ? (
                         <span className="text-lime-500">Paid</span>
                       ) : (
-                        <Link>
+                        <Link to={`/dashboard/payment/${parcel._id}`}>
                           <button className="btn btn-sm bg-lime-400 hover:bg-lime-500 duration-150">
                             Pay
                           </button>
