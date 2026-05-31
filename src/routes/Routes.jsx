@@ -13,9 +13,10 @@ import AuthRoute from "./AuthRoute";
 import Parcel from "../pages/Parcel/Parcel";
 import DashboardLayout from "../layouts/DashboardLayout";
 import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
-import Payment from "../pages/Dashboard/Payment/Payment";
+// import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -90,8 +91,8 @@ export const router = createBrowserRouter([
         element: <MyParcels></MyParcels>,
       },
       {
-        path: "payment/:id",
-        element: <Payment></Payment>,
+        path: "payment-history",
+        element: <PaymentHistory></PaymentHistory>,
       },
       {
         path: "payment-success",

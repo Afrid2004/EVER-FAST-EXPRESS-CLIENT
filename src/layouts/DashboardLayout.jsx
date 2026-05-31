@@ -39,7 +39,7 @@ const DashboardLayout = () => {
           <div className="px-4">Dashboard</div>
         </nav>
         {/* Page content here */}
-        <div className="container py-3">
+        <div className="p-3">
           <Outlet></Outlet>
         </div>
       </div>
@@ -86,7 +86,7 @@ const DashboardLayout = () => {
               <NavLink
                 to="/dashboard/my-parcels"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
-                data-tip="Dashboard"
+                data-tip="My Parcels"
                 end
               >
                 <img
@@ -95,6 +95,21 @@ const DashboardLayout = () => {
                   alt="home"
                 />
                 <span className="is-drawer-close:hidden">My Parcels</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/payment-history"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
+                data-tip="Payment History"
+                end
+              >
+                <img
+                  src="/images/payment_history.png"
+                  className="w-4 shrink-0"
+                  alt="home"
+                />
+                <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
             <li>

@@ -9,7 +9,7 @@
   font-style: normal;
 }
 body {
-  @apply bg-gray-100;
+  @apply bg-gray-100 py-1;
 }
 .container {
   @apply px-4 lg:px-0 w-full max-w-110 sm:max-w-150 md:max-w-187.5 lg:max-w-250 xl:max-w-300 2xl:max-w-325 mx-auto;

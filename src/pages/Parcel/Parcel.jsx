@@ -4,16 +4,17 @@ import { FiMail, FiMapPin, FiPhone, FiUser } from "react-icons/fi";
 import { LuMapPinned, LuWeight } from "react-icons/lu";
 import useAuth from "../../Hooks/useAuth";
 import { FaArrowRight } from "react-icons/fa";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Swal from "sweetalert2";
-import useAxios from "../../Hooks/AxiosHook";
+import useAxiosSecure from "../../Hooks/AxiosSecure";
 
 const Parcel = () => {
   const { user } = useAuth();
   const locations = useLoaderData();
-  const axiosInstance = useAxios();
+  const axiosSecureInstance = useAxiosSecure();
+  const navigate = useNavigate();
   const duplicateRegions = locations.map((loc) => loc.region);
   //remove duplicate and set comomon regions
   const regions = [...new Set(duplicateRegions)];
@@ -134,24 +135,28 @@ const Parcel = () => {
       showCancelButton: true,
       confirmButtonColor: "#7ccf00",
       cancelButtonColor: "#1e2939",
-      confirmButtonText: "Yes, I Agree!",
+      confirmButtonText: "Agree and continue payment.",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosInstance.post("/parcels", { ...parceldata, cost }).then((res) => {
-          if (res.data.insertedId) {
-            Swal.fire({
-              title: "Submitted!",
-              text: "Your parcel has been submitted.",
-              icon: "success",
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Failed!",
-              text: "Failed to submit your parcel. Please try again later.",
-            });
-          }
-        });
+        axiosSecureInstance
+          .post("/parcels", { ...parceldata, cost })
+          .then((res) => {
+            if (res.data.insertedId) {
+              navigate("/dashboard/my-parcels");
+              Swal.fire({
+                icon: "success",
+                title: "Parcel has created. Please pay.",
+                showConfirmButton: false,
+                timer: 2500,
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Failed!",
+                text: "Failed to submit your parcel. Please try again later.",
+              });
+            }
+          });
       }
     });
   };

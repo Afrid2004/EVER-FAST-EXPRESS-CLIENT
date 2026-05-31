@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAuth from "../../../Hooks/useAuth";
-import useAxios from "../../../Hooks/AxiosHook";
+import useAxiosSecure from "../../../Hooks/AxiosSecure";
 import { Link } from "react-router";
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
 import Swal from "sweetalert2";
 
 const MyParcels = () => {
   const { user } = useAuth();
-  const axiosInstance = useAxios();
+  const axiosSecureInstance = useAxiosSecure();
   const {
     data: parcels = [],
     isLoading,
@@ -17,7 +17,7 @@ const MyParcels = () => {
   } = useQuery({
     queryKey: ["myparcels", user?.uid],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/parcels?uid=${user?.uid}`);
+      const res = await axiosSecureInstance.get(`/parcels?uid=${user?.uid}`);
       return res.data;
     },
   });
@@ -33,7 +33,7 @@ const MyParcels = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosInstance.delete(`/parcels/${id}`).then((res) => {
+        axiosSecureInstance.delete(`/parcels/${id}`).then((res) => {
           if (res.data.deletedCount) {
             refetch();
             Swal.fire({
@@ -45,6 +45,22 @@ const MyParcels = () => {
         });
       }
     });
+  };
+
+  const handlePayment = async (parcel) => {
+    const paymentInfo = {
+      cost: parcel.cost,
+      senderuid: parcel.senderuid,
+      senderemail: parcel.senderemail,
+      parcelname: parcel.parcelname,
+      parcelId: parcel._id,
+    };
+    const res = await axiosSecureInstance.post(
+      "/create-checkout-session",
+      paymentInfo,
+    );
+    console.log(res);
+    window.location.href = res.data.url;
   };
   return (
     <div className="p-10 bg-white border border-gray-200 rounded-2xl">
@@ -64,8 +80,9 @@ const MyParcels = () => {
                 <th>Sl.</th>
                 <th>Parcel Info</th>
                 <th>Recipient Info</th>
+                <th>Cost</th>
                 <th>Payment</th>
-                <th>Delivery Status</th>
+                {/* <th>Delivery Status</th> */}
                 <th>Action</th>
               </tr>
             </thead>
@@ -86,23 +103,26 @@ const MyParcels = () => {
                         <p>Phone: {parcel.receiverphone}</p>
                       </div>
                     </td>
+                    <td>{parcel.cost} TK</td>
                     <td>
-                      {parcel.paymentStatus === "paid" ? (
-                        <span className="text-lime-500">Paid</span>
+                      {parcel.paymentstatus === "paid" ? (
+                        <span className="text-lime-500 font-bold text-[16px]">
+                          Paid
+                        </span>
                       ) : (
-                        <Link to={`/dashboard/payment/${parcel._id}`}>
-                          <button className="btn btn-sm bg-lime-400 hover:bg-lime-500 duration-150">
-                            Pay
-                          </button>
-                        </Link>
+                        <button
+                          onClick={() => handlePayment(parcel)}
+                          className="btn btn-sm bg-lime-400 hover:bg-lime-500 duration-150"
+                        >
+                          Pay
+                        </button>
                       )}
                     </td>
-                    <td></td>
                     <td>
                       <div className="flex items-center gap-2">
                         <div className="tooltip" data-tip="View Parcel">
                           <Link
-                            className="btn btn-square hover:bg-lime-400 duration-150 rounded-lg"
+                            className="btn btn-square bg-lime-400/50 hover:bg-lime-400 duration-150 rounded-lg"
                             to={`/parcel/view/${parcel._id}`}
                           >
                             <FiEye size={18} />
@@ -110,7 +130,7 @@ const MyParcels = () => {
                         </div>
                         <div className="tooltip" data-tip="Edit Parcel">
                           <Link
-                            className="btn btn-square hover:bg-gray-800 hover:text-white duration-150 rounded-lg"
+                            className="btn btn-square bg-amber-300/50 hover:bg-amber-300 duration-150 rounded-lg"
                             to={`/parcel/edit/${parcel._id}`}
                           >
                             <FiEdit size={18} />
@@ -119,7 +139,7 @@ const MyParcels = () => {
                         <div className="tooltip" data-tip="Delete Parcel">
                           <button
                             onClick={() => handleParcelDelete(parcel._id)}
-                            className="btn btn-square hover:bg-red-400 duration-150 rounded-lg"
+                            className="btn btn-square bg-red-400/40 hover:bg-red-400 duration-150 rounded-lg"
                             to={`/parcel/edit/${parcel._id}`}
                           >
                             <FiTrash size={18} />
