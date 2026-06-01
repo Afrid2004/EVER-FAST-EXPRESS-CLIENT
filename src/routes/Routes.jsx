@@ -17,6 +17,7 @@ import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
 import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import PendingRider from "../pages/Dashboard/PendingRider/PendingRider";
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ export const router = createBrowserRouter([
       {
         path: "payment-cancelled",
         element: <PaymentCancelled></PaymentCancelled>,
+      },
+      {
+        path: "pending-riders",
+        element: <PendingRider></PendingRider>,
       },
     ],
   },

@@ -113,6 +113,21 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink
+                to="/dashboard/pending-riders"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
+                data-tip="Pending Riders"
+                end
+              >
+                <img
+                  src="/images/pendingrider.png"
+                  className="w-4 shrink-0"
+                  alt="home"
+                />
+                <span className="is-drawer-close:hidden">Pending Riders</span>
+              </NavLink>
+            </li>
+            <li>
               <button
                 onClick={logout}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
