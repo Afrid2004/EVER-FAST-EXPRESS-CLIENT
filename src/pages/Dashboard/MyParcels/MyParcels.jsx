@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../Hooks/AxiosSecure";
 import { Link } from "react-router";
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
 import Swal from "sweetalert2";
+import LoadingTable from "../../../components/Loadings/LoadingTable";
 
 const MyParcels = () => {
   const { user } = useAuth();
@@ -49,10 +50,6 @@ const MyParcels = () => {
 
   const handlePayment = async (parcel) => {
     const paymentInfo = {
-      cost: parcel.cost,
-      senderuid: parcel.senderuid,
-      senderemail: parcel.senderemail,
-      parcelname: parcel.parcelname,
       parcelId: parcel._id,
     };
     const res = await axiosSecureInstance.post(
@@ -68,7 +65,9 @@ const MyParcels = () => {
         Manage Parcel
       </h1>
 
-      {parcels.length > 0 ? (
+      {isLoading ? (
+        <LoadingTable></LoadingTable>
+      ) : parcels.length > 0 ? (
         <div className="overflow-x-auto">
           <span className="mb-3 block">
             Total parcel: <strong>{parcels.length}</strong>

@@ -5,12 +5,13 @@ import useAxiosSecure from "../../../Hooks/AxiosSecure";
 import { Link } from "react-router";
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
 import Swal from "sweetalert2";
+import LoadingTable from "../../../components/Loadings/LoadingTable";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
   const axiosSecureInstance = useAxiosSecure();
 
-  const { data: payments = [] } = useQuery({
+  const { data: payments = [], isLoading } = useQuery({
     queryKey: ["payments", user?.uid],
     queryFn: async () => {
       const res = await axiosSecureInstance.get(`/payments?uid=${user?.uid}`);
@@ -24,7 +25,9 @@ const PaymentHistory = () => {
         Payment History
       </h1>
 
-      {payments.length > 0 ? (
+      {isLoading ? (
+        <LoadingTable rows={5}></LoadingTable>
+      ) : payments.length > 0 ? (
         <div className="overflow-x-auto">
           <span className="mb-3 block">
             Total payments: <strong>{payments.length}</strong>
@@ -35,7 +38,7 @@ const PaymentHistory = () => {
               <tr>
                 <th>Sl.</th>
                 <th>Parcel Info</th>
-                <th>Sender Email</th>
+                <th>Payment Time</th>
                 <th>Tracking Id</th>
                 <th>Transaction Id</th>
                 <th>Payment Info</th>
@@ -48,7 +51,7 @@ const PaymentHistory = () => {
                   <tr key={payment._id}>
                     <th>{i + 1}</th>
                     <td>{payment.parcelName}</td>
-                    <td>{payment.senderEmail}</td>
+                    <td>{new Date(payment.paidAt).toLocaleString()}</td>
                     <td>{payment.trackingId}</td>
                     <td>{payment.transactionId}</td>
                     <td>

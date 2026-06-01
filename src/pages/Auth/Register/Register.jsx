@@ -6,6 +6,8 @@ import { Link, useLocation, useNavigate } from "react-router";
 import * as yup from "yup";
 import useAuth from "../../../Hooks/useAuth";
 import LoadingSpin from "../../../components/Loadings/LoadingSpin";
+import useAxios from "../../../Hooks/AxiosHook";
+import useGoogleLogin from "../GoogleLogin/GoogleLogin";
 
 const Register = () => {
   const {
@@ -15,6 +17,7 @@ const Register = () => {
     logoutUser,
     logInWithGoogle,
   } = useAuth();
+  const axiosInstance = useAxios();
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,6 +25,7 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.state?.from?.pathname || "/";
+  const handleGoogleLogin = useGoogleLogin();
   const handleShow = () => {
     setShow(!show);
   };
@@ -54,16 +58,6 @@ const Register = () => {
     },
   });
 
-  const handleGoogleLogin = () => {
-    logInWithGoogle()
-      .then((result) => {
-        navigate(path, { replace: true });
-      })
-      .catch((err) => {
-        setErr("Google login failed");
-      });
-  };
-
   const errorMessageFunc = (value) => {
     return (
       <div className="error w-full mb-3 px-4 py-2 rounded-sm bg-red-200/70 text-red-900 border border-red-300/50">
@@ -82,9 +76,17 @@ const Register = () => {
       if (!result.user.emailVerified) {
         await emailVerification();
       }
-      if (result.user.displayName == null) {
+      if (!result.user.displayName) {
         await updateUser({ displayName: name });
       }
+      const user = {
+        displayName: name,
+        email: email,
+        photoURL: "",
+        uid: result.user.uid,
+      };
+      await axiosInstance.post("/users", user);
+
       await logoutUser();
       setSuccess(
         "Account created successfully! Please check your email for verification.",

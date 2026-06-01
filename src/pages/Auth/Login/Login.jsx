@@ -6,15 +6,19 @@ import { Link, useLocation, useNavigate } from "react-router";
 import * as yup from "yup";
 import useAuth from "../../../Hooks/useAuth";
 import LoadingSpin from "../../../components/Loadings/LoadingSpin";
+import useAxios from "../../../Hooks/AxiosHook";
+import useGoogleLogin from "../GoogleLogin/GoogleLogin";
 
 const Login = () => {
   const { loginUser, logoutUser, logInWithGoogle } = useAuth();
   const [show, setShow] = useState(false);
   const [err, setErr] = useState("");
+  const axiosInstance = useAxios();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const path = location.state?.from?.pathname || "/";
+  const handleGoogleLogin = useGoogleLogin();
   const handleShow = () => {
     setShow(!show);
   };
@@ -34,15 +38,7 @@ const Login = () => {
       }
     },
   });
-  const handleGoogleLogin = () => {
-    logInWithGoogle()
-      .then((result) => {
-        navigate(path, { replace: true });
-      })
-      .catch((err) => {
-        setErr("Google login failed");
-      });
-  };
+
   const errorMessageFunc = (value) => {
     return (
       <div className="error w-full mb-3 px-4 py-2 rounded-sm bg-red-200/70 text-red-900 border border-red-300/50">

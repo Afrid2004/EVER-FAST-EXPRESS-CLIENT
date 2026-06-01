@@ -22,7 +22,8 @@ const Navbar = () => {
       <NavLink to="/parcel">Send Parcel</NavLink>
       <NavLink to="/coverage">Coverage</NavLink>
       <NavLink to="/about-us">About Us</NavLink>
-      <NavLink to="/pricing">Pricing</NavLink>
+      <NavLink to="/rider">Become a Rider</NavLink>
+      {/* <NavLink to="/pricing">Pricing</NavLink> */}
       {/* <NavLink to="/blog">Blog</NavLink> */}
       {/* <NavLink to="/contact">Contact</NavLink> */}
     </>
@@ -46,15 +47,6 @@ const Navbar = () => {
               tabIndex="-1"
               className="dropdown-content menu border border-gray-200 flex flex-col gap-2 bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
             >
-              <li>
-                <Link
-                  to="/rider"
-                  className="bg-lime-400 text-sm font-medium border border-lime-500/50 px-3 py-2 rounded-lg hover:bg-lime-500 duration-75"
-                >
-                  Be a Rider
-                </Link>
-              </li>
-
               <li>
                 <Link
                   to="/dashboard"

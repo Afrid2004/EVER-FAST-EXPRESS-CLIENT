@@ -136,6 +136,34 @@ body {
 .animate-fadeIn {
   animation: fadeIn 0.5s ease;
 }
+
+.animated-rider {
+  position: relative;
+  animation: rider 2s linear infinite alternate;
+}
+
+.animated-rider::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  bottom: -1rem;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.084);
+  /* filter: blur(2px); */
+  border-radius: 50%;
+}
+@keyframes rider {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @media (min-width: 768px) {
   .review-wrapper::before {
     background: linear-gradient(to right, #f3f4f6, transparent);
