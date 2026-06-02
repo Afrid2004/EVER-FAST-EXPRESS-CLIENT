@@ -50,8 +50,6 @@ const PendingRider = () => {
   const handleReject = (rider) => {
     handleRiderStatus(rider, "rejected");
   };
-
-  console.log(riders);
   return (
     <div className="p-10 bg-white border border-gray-200 rounded-2xl">
       <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
