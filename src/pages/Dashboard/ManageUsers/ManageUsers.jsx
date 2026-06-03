@@ -1,24 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/AxiosSecure";
 import LoadingTable from "../../../components/Loadings/LoadingTable";
 import Avatar from "../../../components/Avatar/Avatar";
 import { LuShieldBan, LuShieldCheck } from "react-icons/lu";
 import Swal from "sweetalert2";
+import { FiSearch } from "react-icons/fi";
+import LoadingSpin from "../../../components/Loadings/LoadingSpin";
+import { IoChevronDown } from "react-icons/io5";
 
 const ManageUsers = () => {
   const { user } = useAuth();
-
   const axiosSecureInstance = useAxiosSecure();
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("createdAt");
+  const [order, setOrder] = useState("asc");
+  const [limit, setLimit] = useState(5);
+
+  const handleChange = (e) => {
+    const searchValue = e.target.value.trim();
+    setSearch(searchValue);
+  };
+
+  const handleSort = (e) => {
+    const sortedValue = e.target.value.split("-");
+    setSort(sortedValue[0]);
+    setOrder(sortedValue[1]);
+  };
+
+  const handleSeeMore = () => {
+    setLimit((prev) => prev + 5);
+  };
+
   const {
-    data: users = [],
+    data: users = { result: [], totalUser: 0 },
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["users", user?.uid],
+    queryKey: ["users", search, sort, order, limit],
     queryFn: async () => {
-      const res = await axiosSecureInstance.get("/users");
+      const res = await axiosSecureInstance.get(
+        `/users?search=${search}&limit=${limit}&sort=${sort}&order=${order}`,
+      );
       return res.data;
     },
   });
@@ -65,13 +89,50 @@ const ManageUsers = () => {
         Manage Users
       </h1>
 
+      <div className="mb-3">
+        <div className="flex items-center justify-between gap-5">
+          <div>
+            <p>
+              Total user: <strong>{users.totalUser}</strong>
+            </p>
+          </div>
+          <div>
+            <div className="flex w-sm border border-gray-300/70 h-10 rounded-sm overflow-hidden">
+              <input
+                type="text"
+                name="search"
+                onChange={handleChange}
+                id="search"
+                value={search}
+                placeholder="User name or email"
+                className="outline-none w-full px-2.5 h-full"
+              />
+              <button className="h-full flex items-center justify-center bg-gray-200 px-2.5">
+                <FiSearch className="w-5 shrink-0 text-gray-700" />
+              </button>
+            </div>
+          </div>
+          <div>
+            <select
+              id="sort"
+              name="sort"
+              onChange={handleSort}
+              className="select w-full outline-none"
+            >
+              <option selected value="createdAt-asc">
+                Sort by: Oldest first
+              </option>
+              <option value="createdAt-desc">Sort by: Newest first</option>
+              <option value="displayName-asc">Sort by: Name A-Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       {isLoading ? (
         <LoadingTable></LoadingTable>
-      ) : users.length > 0 ? (
-        <div className="overflow-x-auto">
-          <span className="mb-3 block">
-            Total user: <strong>{users.length}</strong>
-          </span>
+      ) : users.result.length > 0 ? (
+        <div className="overflow-x-auto relative">
           <table className="table table-zebra border border-gray-200/80">
             {/* head */}
             <thead>
@@ -84,7 +145,7 @@ const ManageUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, i) => {
+              {users.result.map((user, i) => {
                 const userName = user?.displayName || "User";
                 const [first = "", second = ""] = userName.split(" ");
                 return (
@@ -136,13 +197,23 @@ const ManageUsers = () => {
               })}
             </tbody>
           </table>
+          {users.totalUser > limit && (
+            <div className="w-full h-30 absolute left-0 bottom-0 flex items-end justify-center bg-linear-to-b from-transparent to-white to-90%">
+              <button
+                onClick={handleSeeMore}
+                className="px-4 py-2 bg-lime-400 hover:bg-lime-500 duration-150 rounded-4xl mb-3 text-gray-800 text-sm cursor-pointer flex items-center gap-2"
+              >
+                See more <IoChevronDown />
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div
           role="alert"
           className="alert alert-warning alert-soft border border-amber-200"
         >
-          <span>No parcel data found!</span>
+          <span>No user data found!</span>
         </div>
       )}
     </div>
