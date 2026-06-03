@@ -6,8 +6,10 @@ import { NavLink } from "react-router";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLogout } from "../Hooks/useLogout";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+  const { userRole } = useRole();
   const logout = useLogout();
   return (
     <div className="drawer lg:drawer-open">
@@ -112,36 +114,42 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/dashboard/pending-riders"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
-                data-tip="Pending Riders"
-                end
-              >
-                <img
-                  src="/images/pendingrider.png"
-                  className="w-4 shrink-0"
-                  alt="home"
-                />
-                <span className="is-drawer-close:hidden">Pending Riders</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-users"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
-                data-tip="Manage Users"
-                end
-              >
-                <img
-                  src="/images/manageuser.png"
-                  className="w-4 shrink-0"
-                  alt="home"
-                />
-                <span className="is-drawer-close:hidden">Manage Users</span>
-              </NavLink>
-            </li>
+            {userRole === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/pending-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
+                    data-tip="Pending Riders"
+                    end
+                  >
+                    <img
+                      src="/images/pendingrider.png"
+                      className="w-4 shrink-0"
+                      alt="home"
+                    />
+                    <span className="is-drawer-close:hidden">
+                      Pending Riders
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-users"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
+                    data-tip="Manage Users"
+                    end
+                  >
+                    <img
+                      src="/images/manageuser.png"
+                      className="w-4 shrink-0"
+                      alt="home"
+                    />
+                    <span className="is-drawer-close:hidden">Manage Users</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
             <li>
               <button
                 onClick={logout}

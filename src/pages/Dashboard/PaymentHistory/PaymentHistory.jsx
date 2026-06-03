@@ -55,7 +55,7 @@ const PaymentHistory = () => {
                     <td>{payment.trackingId}</td>
                     <td>{payment.transactionId}</td>
                     <td>
-                      {payment.amount} {payment.currency.toUpperCase()} (
+                      {payment.amount} {payment?.currency?.toUpperCase()} (
                       {payment.paymentStatus})
                     </td>
                     <td>

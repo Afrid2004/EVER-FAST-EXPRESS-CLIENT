@@ -19,6 +19,7 @@ import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import PendingRider from "../pages/Dashboard/PendingRider/PendingRider";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -107,11 +108,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "pending-riders",
-        element: <PendingRider></PendingRider>,
+        element: (
+          <AdminRoute>
+            <PendingRider></PendingRider>
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-users",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
     ],
   },

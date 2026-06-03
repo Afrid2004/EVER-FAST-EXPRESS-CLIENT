@@ -34,9 +34,9 @@ const ManageUsers = () => {
       if (result.isConfirmed) {
         const manageuser = { isAdmin: isAdmin };
         axiosSecureInstance
-          .patch(`/users/${user._id}`, manageuser)
+          .patch(`/users/${user._id}/role`, manageuser)
           .then((res) => {
-            if (res.data.modifiedCount) {
+            if (res.data?.modifiedCount) {
               refetch();
               Swal.fire({
                 title: "Updated!",
