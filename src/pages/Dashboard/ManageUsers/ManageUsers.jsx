@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const { user } = useAuth();
+
   const axiosSecureInstance = useAxiosSecure();
   const {
     data: users = [],

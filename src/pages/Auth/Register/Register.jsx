@@ -6,8 +6,8 @@ import { Link, useLocation, useNavigate } from "react-router";
 import * as yup from "yup";
 import useAuth from "../../../Hooks/useAuth";
 import LoadingSpin from "../../../components/Loadings/LoadingSpin";
-import useAxios from "../../../Hooks/AxiosHook";
 import useGoogleLogin from "../GoogleLogin/GoogleLogin";
+import useAxiosSecure from "../../../Hooks/AxiosSecure";
 
 const Register = () => {
   const {
@@ -17,7 +17,7 @@ const Register = () => {
     logoutUser,
     logInWithGoogle,
   } = useAuth();
-  const axiosInstance = useAxios();
+  const axiosSecureInstance = useAxiosSecure();
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -85,7 +85,7 @@ const Register = () => {
         photoURL: "",
         uid: result.user.uid,
       };
-      await axiosInstance.post("/users", user);
+      await axiosSecureInstance.post("/users", user);
 
       await logoutUser();
       setSuccess(

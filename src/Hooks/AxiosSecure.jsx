@@ -22,7 +22,7 @@ const useAxiosSecure = () => {
         return response;
       },
       (err) => {
-        const status = err.status;
+        const status = err.response?.status;
         if (status === 401 || status === 403) {
           navigate("/", { replace: true });
         }
