@@ -81,7 +81,7 @@ const MyParcels = () => {
                 <th>Recipient Info</th>
                 <th>Cost</th>
                 <th>Payment</th>
-                {/* <th>Delivery Status</th> */}
+                <th>Delivery Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -104,7 +104,7 @@ const MyParcels = () => {
                     </td>
                     <td>{parcel.cost} TK</td>
                     <td>
-                      {parcel.paymentstatus === "paid" ? (
+                      {parcel.paymentStatus === "paid" ? (
                         <span className="text-lime-500 font-bold text-[16px]">
                           Paid
                         </span>
@@ -117,6 +117,7 @@ const MyParcels = () => {
                         </button>
                       )}
                     </td>
+                    <td>{parcel.deliveryStatus}</td>
                     <td>
                       <div className="flex items-center gap-2">
                         <div className="tooltip" data-tip="View Parcel">

@@ -23,8 +23,12 @@ const PendingRider = () => {
     },
   });
 
-  const handleRiderStatus = (rider, status) => {
-    const updateInfo = { status: status, uid: rider.uid };
+  const handleRiderStatus = (rider, status, workStatus) => {
+    const updateInfo = {
+      status: status,
+      uid: rider.uid,
+      workStatus: workStatus,
+    };
     axiosSecureInstance
       .patch(`/riders/${rider._id}`, updateInfo)
       .then((res) => {
@@ -45,10 +49,10 @@ const PendingRider = () => {
   };
 
   const handleApprove = (rider) => {
-    handleRiderStatus(rider, "approved");
+    handleRiderStatus(rider, "approved", "available");
   };
   const handleReject = (rider) => {
-    handleRiderStatus(rider, "rejected");
+    handleRiderStatus(rider, "rejected", "layoff");
   };
   return (
     <div className="p-10 bg-white border border-gray-200 rounded-2xl">
