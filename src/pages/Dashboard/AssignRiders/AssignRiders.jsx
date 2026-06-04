@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../Hooks/AxiosSecure";
 import LoadingTable from "../../../components/Loadings/LoadingTable";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { TbHandFinger } from "react-icons/tb";
+import Swal from "sweetalert2";
 
 const AssignRiders = () => {
   const { user } = useAuth();
@@ -12,7 +13,11 @@ const AssignRiders = () => {
   const axiosSecureInstance = useAxiosSecure();
   const [selectedParcel, setSelectedParcel] = useState();
   //load pendig-pickup parcels
-  const { data: parcels = [], isLoading } = useQuery({
+  const {
+    data: parcels = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["assigned-riders", user?.uid],
     queryFn: async () => {
       const res = await axiosSecureInstance.get(
@@ -23,7 +28,11 @@ const AssignRiders = () => {
   });
 
   // load riders who are avialable
-  const { data: riders = [], isLoading: riderLoading } = useQuery({
+  const {
+    data: riders = [],
+    isLoading: riderLoading,
+    refetch: riderRefetch,
+  } = useQuery({
     queryKey: ["riders", selectedParcel?.senderdistrict, "available"],
     // enabled used for only enable based on selectedparcel state
     enabled: !!selectedParcel,
@@ -35,14 +44,36 @@ const AssignRiders = () => {
       return res.data;
     },
   });
+
   const handleAssignRiderModal = (parcel) => {
     modalRef.current.showModal();
     setSelectedParcel(parcel);
   };
 
-  // const assignRiders = () => {
-
-  // }
+  const handleAssignRider = (rider) => {
+    const riderInfo = {
+      parcelId: selectedParcel._id,
+      riderid: rider._id,
+      ridername: rider.name,
+      riderphone: rider.phone,
+    };
+    axiosSecureInstance
+      .patch(`/parcels/${selectedParcel._id}`, riderInfo)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          modalRef.current.close();
+          refetch();
+          riderRefetch();
+          Swal.fire({
+            title: "Success!",
+            text: `Parcel has been assingned to the Rider.`,
+            icon: "success",
+          });
+        } else {
+          console.log(res.data);
+        }
+      });
+  };
   return (
     <div className="p-10 bg-white border border-gray-200 rounded-2xl">
       <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
@@ -89,7 +120,7 @@ const AssignRiders = () => {
                         onClick={() => handleAssignRiderModal(parcel)}
                         className="flex items-center gap-1 bg-lime-400/70 hover:bg-lime-400 duration-150 rounded-lg py-1 px-2 cursor-pointer"
                       >
-                        Show Rider
+                        Show Riders
                         <MdOutlineAddLocationAlt />
                       </button>
                     </td>
@@ -124,7 +155,7 @@ const AssignRiders = () => {
                             <td>{rider.phone}</td>
                             <td>
                               <button
-                                onClick={() => handleAssignRiderModal(parcel)}
+                                onClick={() => handleAssignRider(rider)}
                                 className="flex items-center gap-1 bg-lime-400/70 hover:bg-lime-400 duration-150 rounded-lg py-1 px-2 cursor-pointer shrink-0"
                               >
                                 Assign Rider
