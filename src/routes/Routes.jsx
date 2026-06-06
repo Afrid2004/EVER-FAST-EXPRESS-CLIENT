@@ -21,6 +21,8 @@ import PendingRider from "../pages/Dashboard/PendingRider/PendingRider";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AssignRiders from "../pages/Dashboard/AssignRiders/AssignRiders";
+import AssignedParcels from "../pages/Dashboard/AssgnedParcels/AssignedParcels";
+import RiderRoute from "./RiderRoute";
 
 export const router = createBrowserRouter([
   {
@@ -129,6 +131,14 @@ export const router = createBrowserRouter([
           <AdminRoute>
             <AssignRiders></AssignRiders>
           </AdminRoute>
+        ),
+      },
+      {
+        path: "assigned-parcels",
+        element: (
+          <RiderRoute>
+            <AssignedParcels></AssignedParcels>
+          </RiderRoute>
         ),
       },
     ],

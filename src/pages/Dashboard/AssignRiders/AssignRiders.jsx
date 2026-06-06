@@ -54,6 +54,7 @@ const AssignRiders = () => {
     const riderInfo = {
       parcelId: selectedParcel._id,
       riderid: rider._id,
+      rideruid: rider.uid,
       ridername: rider.name,
       riderphone: rider.phone,
     };
