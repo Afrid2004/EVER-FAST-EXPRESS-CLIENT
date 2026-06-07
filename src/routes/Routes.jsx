@@ -23,6 +23,8 @@ import AdminRoute from "./AdminRoute";
 import AssignRiders from "../pages/Dashboard/AssignRiders/AssignRiders";
 import AssignedParcels from "../pages/Dashboard/AssgnedParcels/AssignedParcels";
 import RiderRoute from "./RiderRoute";
+import CompletedDeliveries from "../pages/Dashboard/CompletedDeliveries/CompletedDeliveries";
+import TrackParcel from "../pages/TrackParcel/TrackParcel";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "about-us",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "track-parcel",
+        element: <TrackParcel></TrackParcel>,
       },
       {
         path: "rider",
@@ -138,6 +144,14 @@ export const router = createBrowserRouter([
         element: (
           <RiderRoute>
             <AssignedParcels></AssignedParcels>
+          </RiderRoute>
+        ),
+      },
+      {
+        path: "completed-deliveries",
+        element: (
+          <RiderRoute>
+            <CompletedDeliveries></CompletedDeliveries>
           </RiderRoute>
         ),
       },

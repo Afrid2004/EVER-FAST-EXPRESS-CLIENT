@@ -145,23 +145,42 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
             {userRole === "rider" && (
-              <li>
-                <NavLink
-                  to="/dashboard/assigned-parcels"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
-                  data-tip="Assigned Parcels"
-                  end
-                >
-                  <img
-                    src="/images/assigned.png"
-                    className="w-4 shrink-0"
-                    alt="home"
-                  />
-                  <span className="is-drawer-close:hidden">
-                    Assigned Parcels
-                  </span>
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/assigned-parcels"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
+                    data-tip="Assigned Parcels"
+                    end
+                  >
+                    <img
+                      src="/images/assigned.png"
+                      className="w-4 shrink-0"
+                      alt="home"
+                    />
+                    <span className="is-drawer-close:hidden">
+                      Assigned Parcels
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/completed-deliveries"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
+                    data-tip="Completed Deliveries"
+                    end
+                  >
+                    <img
+                      src="/images/completed.png"
+                      className="w-4 shrink-0"
+                      alt="home"
+                    />
+                    <span className="is-drawer-close:hidden">
+                      Completed Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+              </>
             )}
             {userRole === "admin" && (
               <>

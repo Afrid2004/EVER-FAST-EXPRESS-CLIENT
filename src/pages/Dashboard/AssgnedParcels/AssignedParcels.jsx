@@ -32,7 +32,11 @@ const AssignedParcels = () => {
       confirmButtonText: "Yes, Confirm!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const acceptInfo = { response: response, riderid: parcel.riderid };
+        const acceptInfo = {
+          response: response,
+          riderid: parcel.riderid,
+          trackingId: parcel.trackingId,
+        };
         axiosSecureInstance
           .patch(`/parcels/${parcel._id}/rider`, acceptInfo)
           .then((res) => {
@@ -135,14 +139,14 @@ const AssignedParcels = () => {
                           onClick={() => handlePickedUp(parcel)}
                           className="flex items-center gap-1 bg-amber-400/70 hover:bg-amber-400 duration-150 text-sm rounded-lg py-1 px-2 cursor-pointer"
                         >
-                          Picked Up
+                          Pick Up
                         </button>
                       ) : parcel.deliveryStatus === "picked-up" ? (
                         <button
                           onClick={() => handleDeliverd(parcel)}
                           className="flex items-center gap-1 bg-lime-400/70 hover:bg-lime-400 text-sm duration-150 rounded-lg py-1 px-2 cursor-pointer"
                         >
-                          Delivered
+                          Deliver
                         </button>
                       ) : (
                         <span>No data</span>

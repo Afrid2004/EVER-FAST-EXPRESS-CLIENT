@@ -55,6 +55,14 @@ const Navbar = () => {
                   Dashboard
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/track-parcel"
+                  className="bg-gray-100 text-sm  font-medium border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
+                >
+                  Track Parcel
+                </Link>
+              </li>
 
               <li>
                 <button
