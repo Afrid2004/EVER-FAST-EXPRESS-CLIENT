@@ -35,7 +35,6 @@ const AssignedParcels = () => {
         const acceptInfo = {
           response: response,
           riderid: parcel.riderid,
-          trackingId: parcel.trackingId,
         };
         axiosSecureInstance
           .patch(`/parcels/${parcel._id}/rider`, acceptInfo)

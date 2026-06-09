@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
 import Swal from "sweetalert2";
 import LoadingTable from "../../../components/Loadings/LoadingTable";
+import { MdOutlineTrackChanges } from "react-icons/md";
 
 const MyParcels = () => {
   const { user } = useAuth();
@@ -117,7 +118,27 @@ const MyParcels = () => {
                         </button>
                       )}
                     </td>
-                    <td>{parcel.deliveryStatus}</td>
+                    <td>
+                      {parcel.deliveryStatus === "pending" ? (
+                        parcel.deliveryStatus
+                      ) : (
+                        <>
+                          <p className="mb-2">
+                            {parcel.deliveryStatus.toUpperCase()}
+                          </p>
+                          <Link
+                            className="flex items-center justify-center bg-lime-400 hover:bg-lime-500 px-3 py-1.5 rounded-sm text-gray-800 gap-1 cursor-pointer shrink-0 w-fit text-sm"
+                            to={`/track-parcel?trackingid=${parcel.trackingId}`}
+                          >
+                            Track{" "}
+                            <MdOutlineTrackChanges
+                              size={18}
+                              className="shrink-0"
+                            />
+                          </Link>
+                        </>
+                      )}
+                    </td>
                     <td>
                       <div className="flex items-center gap-2">
                         <div className="tooltip" data-tip="View Parcel">
