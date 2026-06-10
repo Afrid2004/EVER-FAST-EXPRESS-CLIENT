@@ -1,5 +1,5 @@
 import { replace, useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff, FiLock, FiMail, FiUser } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router";
@@ -10,8 +10,9 @@ import useAxios from "../../../Hooks/AxiosHook";
 import useGoogleLogin from "../GoogleLogin/GoogleLogin";
 
 const Login = () => {
-  const { loginUser, logoutUser, logInWithGoogle } = useAuth();
+  const { loginUser, logoutUser, logInWithGoogle, forgotPass } = useAuth();
   const [show, setShow] = useState(false);
+  const emailRef = useRef();
   const [err, setErr] = useState("");
   const axiosInstance = useAxios();
   const navigate = useNavigate();
@@ -72,6 +73,19 @@ const Login = () => {
     }
   };
 
+  const handleForgotPass = () => {
+    setErr("");
+    const email = emailRef.current.value.trim();
+    if (!email) {
+      setErr("Please enter your email first!");
+      emailRef.current.focus();
+      return;
+    }
+    forgotPass(email).then(() =>
+      alert("An email reset link has been sent to your email."),
+    );
+  };
+
   const emailError =
     formik.touched.email &&
     formik.errors.email &&
@@ -108,13 +122,14 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
+              ref={emailRef}
               onChange={formik.handleChange}
               value={formik.values.email}
               placeholder="example@gmail.com"
               className="outline-none w-full px-2.5 h-full"
             />
           </div>
-          <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden mb-4">
+          <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden mb-3">
             <label htmlFor="password">
               <div className="h-full flex items-center justify-center bg-gray-200 px-2.5">
                 <FiLock className="w-5 shrink-0 text-gray-700" />
@@ -142,6 +157,14 @@ const Login = () => {
                 />
               )}
             </div>
+          </div>
+          <div className="mb-3">
+            <p
+              onClick={handleForgotPass}
+              className="text-sm hover:underline text-gray-500 cursor-pointer"
+            >
+              Forgot Password?
+            </p>
           </div>
           <button
             disabled={loading}
