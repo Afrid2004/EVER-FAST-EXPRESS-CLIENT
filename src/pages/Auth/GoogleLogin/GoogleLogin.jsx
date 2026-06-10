@@ -20,11 +20,15 @@ const useGoogleLogin = () => {
         uid: result.user.uid,
       };
 
-      const res = await axios.post("http://localhost:3000/users", userData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const res = await axios.post(
+        "https://ever-fast-express-backend-production.up.railway.app/users",
+        userData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       navigate(path, { replace: true });
     });
