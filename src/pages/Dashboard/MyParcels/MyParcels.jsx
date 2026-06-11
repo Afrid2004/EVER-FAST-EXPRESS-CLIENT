@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/AxiosSecure";
 import { Link } from "react-router";
@@ -7,10 +7,13 @@ import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
 import Swal from "sweetalert2";
 import LoadingTable from "../../../components/Loadings/LoadingTable";
 import { MdOutlineTrackChanges } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
 
 const MyParcels = () => {
   const { user } = useAuth();
   const axiosSecureInstance = useAxiosSecure();
+  const [modal, setModal] = useState(false);
+  const [selectedParcel, setSelectedParcel] = useState(null);
   const {
     data: parcels = [],
     isLoading,
@@ -60,6 +63,108 @@ const MyParcels = () => {
     console.log(res);
     window.location.href = res.data.url;
   };
+
+  const toggleModal = selectedParcel && (
+    <div
+      className={`duration-150 ${modal ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+    >
+      <div
+        onClick={() => setModal(!modal)}
+        className="fixed top-0 left-0 w-full h-full bg-black/30 flex items-center justify-center z-20 py-10 px-3"
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="w-full max-w-sm lg:max-w-2xl bg-white rounded-xl p-5 h-full  overflow-y-auto lg:h-fit"
+        >
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-xl font-bold text-gray-800">Parcel Details</h1>
+            <div
+              onClick={() => setModal(!modal)}
+              className="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-300 text-2xl cursor-pointer hover:bg-gray-200 duration-75 text-gray-600"
+            >
+              <IoClose />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 mt-3 gap-3">
+            <div className="flex flex-col gap-2">
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Id:</strong> {selectedParcel._id}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Type:</strong> {selectedParcel.type.toUpperCase()}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Name:</strong> {selectedParcel.parcelname} -{" "}
+                  {selectedParcel.parcelweight} KG
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Sender:</strong> {selectedParcel.sendername}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Sender Phone:</strong> {selectedParcel.senderphone}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>From:</strong> {selectedParcel.senderdistrict}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Receiver Name:</strong> {selectedParcel.receivername}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Receiver Phone:</strong>{" "}
+                  {selectedParcel.receiverphone}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Cost:</strong> {selectedParcel.cost} TK
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Created at:</strong>{" "}
+                  {new Date(selectedParcel.createdAt).toLocaleString()}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>Payment Status:</strong>{" "}
+                  {selectedParcel.paymentStatus.toUpperCase()}
+                </p>
+              </div>
+              <div className="border border-gray-300/70 rounded-lg p-3 bg-gray-100">
+                <p>
+                  <strong>To:</strong> {selectedParcel.receiverdistrict}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const ViewDetilsModal = (parcel) => {
+    setModal(!modal);
+    setSelectedParcel(parcel);
+  };
+
   return (
     <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
       <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
@@ -142,21 +247,22 @@ const MyParcels = () => {
                     <td>
                       <div className="flex items-center gap-2">
                         <div className="tooltip" data-tip="View Parcel">
-                          <Link
+                          <button
+                            onClick={() => ViewDetilsModal(parcel)}
                             className="btn btn-square bg-lime-400/50 hover:bg-lime-400 duration-150 rounded-lg"
-                            to={`/parcel/view/${parcel._id}`}
                           >
                             <FiEye size={18} />
-                          </Link>
+                          </button>
+                          {toggleModal}
                         </div>
-                        <div className="tooltip" data-tip="Edit Parcel">
+                        {/* <div className="tooltip" data-tip="Edit Parcel">
                           <Link
                             className="btn btn-square bg-amber-300/50 hover:bg-amber-300 duration-150 rounded-lg"
                             to={`/parcel/edit/${parcel._id}`}
                           >
                             <FiEdit size={18} />
                           </Link>
-                        </div>
+                        </div> */}
                         <div className="tooltip" data-tip="Delete Parcel">
                           <button
                             onClick={() => handleParcelDelete(parcel._id)}
