@@ -13,9 +13,10 @@ const useGoogleLogin = () => {
   const login = () => {
     logInWithGoogle().then(async (result) => {
       const token = await result.user.getIdToken();
+      const email = result?.user?.providerData[0].email || "";
       const userData = {
         displayName: result.user.displayName,
-        email: result.user.email,
+        email: email,
         photoURL: result.user.photoURL || "",
         uid: result.user.uid,
       };

@@ -3,14 +3,19 @@ import { Auth } from "../Firebase/Firebase.config";
 import { createContext } from "react";
 import {
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  reauthenticateWithCredential,
+  reauthenticateWithPopup,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateEmail,
   updateProfile,
+  verifyBeforeUpdateEmail,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -19,7 +24,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
-
+  googleProvider.addScope("email");
+  googleProvider.addScope("profile");
+  console.log(user);
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(Auth, email, password);
   };
@@ -34,6 +41,24 @@ const AuthProvider = ({ children }) => {
 
   const updateUser = (data) => {
     return updateProfile(Auth.currentUser, data);
+  };
+
+  //for email and password user
+  const reAuthenticate = (password) => {
+    const credential = EmailAuthProvider.credential(
+      Auth.currentUser.email,
+      password,
+    );
+    return reauthenticateWithCredential(Auth.currentUser, credential);
+  };
+
+  //for google user
+  const reAuthenticateGoogle = () => {
+    return reauthenticateWithPopup(Auth.currentUser, googleProvider);
+  };
+
+  const updateUserEmail = (email) => {
+    return verifyBeforeUpdateEmail(Auth.currentUser, email);
   };
 
   const emailVerification = () => {
@@ -68,7 +93,9 @@ const AuthProvider = ({ children }) => {
     loading,
     setLoading,
     emailVerification,
-    forgotPass
+    forgotPass,
+    updateUserEmail,
+    reAuthenticate,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

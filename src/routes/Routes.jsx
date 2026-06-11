@@ -26,6 +26,7 @@ import RiderRoute from "./RiderRoute";
 import CompletedDeliveries from "../pages/Dashboard/CompletedDeliveries/CompletedDeliveries";
 import TrackParcel from "../pages/TrackParcel/TrackParcel";
 import DashboardHome from "../pages/Dashboard/DahsboardHome/DashboardHome";
+import Settings from "../pages/Dashboard/Settings/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ export const router = createBrowserRouter([
       {
         path: "payment-cancelled",
         element: <PaymentCancelled></PaymentCancelled>,
+      },
+      {
+        path: "settings",
+        element: <Settings></Settings>,
       },
       {
         path: "pending-riders",

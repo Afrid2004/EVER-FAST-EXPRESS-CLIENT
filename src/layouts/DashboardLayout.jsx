@@ -237,6 +237,20 @@ const DashboardLayout = () => {
               </>
             )}
             <li>
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
+                data-tip="Settings"
+                to="/dashboard/settings"
+              >
+                <img
+                  src="/images/settings.png"
+                  className="w-4 shrink-0"
+                  alt="home"
+                />
+                <span className="is-drawer-close:hidden">Settings</span>
+              </NavLink>
+            </li>
+            <li>
               <button
                 onClick={logout}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3"
