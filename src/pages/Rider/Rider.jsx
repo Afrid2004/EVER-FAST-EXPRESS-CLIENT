@@ -121,9 +121,9 @@ const Rider = () => {
   };
 
   return (
-    <div className="bg-white p-8 lg:p-10 border border-gray-200 rounded-2xl">
-      <div className="flex items-center gap-5">
-        <div className="w-full max-w-6/12">
+    <div className="bg-white p-8 md:p-10 border border-gray-200 rounded-2xl">
+      <div className="flex flex-col md:flex-row md:items-center gap-5">
+        <div className="w-full md:max-w-6/12">
           <div className="flex flex-col gap-5 mb-5">
             <h1 className="font-extrabold text-[40px] text-gray-800">
               Be a Rider
@@ -347,7 +347,7 @@ const Rider = () => {
             </form>
           </div>
         </div>
-        <div className="w-full max-w-6/12 h-full flex items-center justify-center rounded-2xl">
+        <div className="w-full md:max-w-6/12 h-full flex items-center justify-center rounded-2xl">
           <div className="w-50 animated-rider">
             <img
               src="/images/berider.png"

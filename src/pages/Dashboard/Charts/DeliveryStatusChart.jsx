@@ -26,7 +26,7 @@ const DeliveryStatusChart = ({ data }) => {
       <div className="h-100">
         <ResponsiveContainer
           width="100%"
-          className="border border-gray-200 p-8 rounded-2xl h-full"
+          className="border border-gray-200 p-3 md:p-8 rounded-2xl h-full"
         >
           <AreaChart
             data={chartData}

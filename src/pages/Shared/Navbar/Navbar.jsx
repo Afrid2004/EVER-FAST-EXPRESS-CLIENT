@@ -33,8 +33,8 @@ const Navbar = () => {
     <>
       {user ? (
         <div className="flex items-center gap-2">
-          {/* <p>{user.displayName}</p>{" "} */}
-          <div className="dropdown dropdown-end">
+          {/* auth desktop */}
+          <div className="hidden lg:block dropdown dropdown-end">
             <div tabIndex={0} role="button">
               <div
                 className="w-9 h-9 flex items-center justify-center rounded-full overflow-hidden cursor-pointer"
@@ -73,6 +73,15 @@ const Navbar = () => {
                 </button>
               </li>
             </ul>
+          </div>
+
+          {/* auth mobile */}
+          <div className="flex lg:hidden flex-col gap-3 mobile-menu auth text-gray-600 mb-3 w-full">
+            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/track-parcel">Track Parcel</NavLink>
+            <button className="text-left" onClick={logout}>
+              Logout
+            </button>
           </div>
         </div>
       ) : (

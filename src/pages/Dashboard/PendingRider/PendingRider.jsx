@@ -55,7 +55,7 @@ const PendingRider = () => {
     handleRiderStatus(rider, "rejected", "layoff");
   };
   return (
-    <div className="p-10 bg-white border border-gray-200 rounded-2xl">
+    <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
       <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
         Pending Riders
       </h1>

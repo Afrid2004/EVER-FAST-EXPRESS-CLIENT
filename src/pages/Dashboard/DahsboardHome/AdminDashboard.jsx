@@ -62,7 +62,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="p-10 bg-white border border-gray-200 rounded-2xl">
+    <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
       {isLoading ? (
         <LoadingDashboard></LoadingDashboard>
       ) : (
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
           </h1>
 
           <div className="mb-10">
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {deliveryStats.map((stats, index) => {
                 const icon = genrateIcon(stats.status);
                 const dstats = stats.status.split("-").join(" ").toUpperCase();

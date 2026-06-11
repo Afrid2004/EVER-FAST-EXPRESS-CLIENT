@@ -84,20 +84,20 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="p-10 bg-white border border-gray-200 rounded-2xl">
+    <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
       <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
         Manage Users
       </h1>
 
       <div className="mb-3">
-        <div className="flex items-center justify-between gap-5">
+        <div className="flex items-center flex-wrap md:flex-nowrap justify-between gap-5">
           <div>
             <p>
               Total user: <strong>{users.totalUser}</strong>
             </p>
           </div>
-          <div>
-            <div className="flex w-sm border border-gray-300/70 h-10 rounded-sm overflow-hidden">
+          <div className="w-full max-w-sm">
+            <div className="flex w-full border border-gray-300/70 h-10 rounded-sm overflow-hidden">
               <input
                 type="text"
                 name="search"
@@ -153,7 +153,7 @@ const ManageUsers = () => {
                     <td>{i + 1}</td>
                     <td>
                       <div className="flex items-center gap-2">
-                        <div className="w-9 h-9 flex items-center justify-center rounded-full overflow-hidden cursor-pointer">
+                        <div className="w-9 h-9 flex items-center justify-center rounded-full overflow-hidden cursor-pointer shrink-0">
                           {user.photoURL ? (
                             <img
                               src={user.photoURL}

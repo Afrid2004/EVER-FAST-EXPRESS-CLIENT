@@ -82,9 +82,9 @@ const TrackParcel = () => {
         {isLoading ? (
           <LoadingTable></LoadingTable>
         ) : trackings.length > 0 ? (
-          <div className="mt-15">
+          <div className="mt-5 md:mt-15">
             <div className="max-w-2xl mx-auto">
-              <div className="grid grid-cols-5">
+              <div className="grid-cols-5 hidden md:grid">
                 <div>
                   <div className="flex items-center justify-center">
                     <div
@@ -233,7 +233,7 @@ const TrackParcel = () => {
             </div>
 
             <div className="mt-10">
-              <div className="grid grid-cols-3 gap-3 content-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 content-center">
                 {trackings.map((tracking, index) => {
                   const status = tracking.status.split("-").join(" ");
                   return (
