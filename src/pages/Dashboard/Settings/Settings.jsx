@@ -5,22 +5,27 @@ import { IoClose } from "react-icons/io5";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Swal from "sweetalert2";
+import ChangeProfile from "../../../components/Avatar/ChangeProfile";
+import useAxiosSecure from "../../../Hooks/AxiosSecure";
+import ThemeToggle from "../../../components/Theme/ThemeToggle";
 
 const Settings = () => {
   const {
     user,
     updateUser,
     updateUserEmail,
-    emailVerification,
     reAuthenticate,
-    reAuthenticateGoogle,
+    emailVerification,
   } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const userName = user?.displayName || "User";
   const [first = "", second = ""] = userName.split(" ");
-  const [modal, setModal] = useState(true);
-  const email = user?.providerData[0].email || "";
+  const [modal, setModal] = useState(false);
+  const email = user?.email || user?.providerData?.[0]?.email || "";
+  const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
+
   // check user logged in with google
-  const isGoogleUser = user.providerData.some(
+  const isGoogleUser = user?.providerData?.some(
     (p) => p.providerId === "google.com",
   );
 
@@ -41,38 +46,51 @@ const Settings = () => {
     },
   });
 
+  // getting image src using state lifting
+  const handleOnPhotoUpload = (imageSrc) => {
+    setPhotoURL(imageSrc);
+  };
+
   const handleUpdate = async (values) => {
     try {
-      await updateUser({ displayName: values.name });
+      // update displayName
+      await updateUser({ displayName: values.name, photoURL: photoURL });
       if (values.email !== email) {
-        if (isGoogleUser) {
-          // await reAuthenticateGoogle();
-          Swal.fire({
-            title: "Error",
-            text: "Google user cannot change email!",
-            icon: "error",
-          });
-          return;
-        } else {
-          const { value: password } = await Swal.fire({
-            title: "Confirm Password",
-            text: "To update your email please update your password.",
-            input: "password",
-            inputPlaceholder: "Your current password",
-            showCancelButton: true,
-            inputAttributes: { autocomplete: "current-password" },
-          });
-          if (!password) return;
-          await reAuthenticate(password);
-        }
+        const { value: password } = await Swal.fire({
+          title: "Confirm Password",
+          text: "To update your email please update your password.",
+          input: "password",
+          inputPlaceholder: "Your current password",
+          showCancelButton: true,
+          inputAttributes: { autocomplete: "current-password" },
+        });
+        if (!password) return;
+        await reAuthenticate(password);
+        //update mail
         await updateUserEmail(values.email);
+        await emailVerification();
       }
-      Swal.fire({
-        title: "Upated!",
-        text: "Profile updated. Please verify your new email.",
-        icon: "success",
-      });
+      const updateInfo = {
+        displayName: values.name,
+        photoURL: photoURL,
+        email: values.email,
+      };
+      const res = await axiosSecure.patch(
+        `/users/${user?.uid}/info`,
+        updateInfo,
+      );
+      if (res.data.modifiedCount || res.data.matchedCount) {
+        Swal.fire({
+          title: "Upated!",
+          text:
+            values.email !== email
+              ? "Profile updated. Please verify your new email."
+              : "Profile updated successfully.",
+          icon: "success",
+        }).then(() => setModal(!modal));
+      }
     } catch (error) {
+      console.log(error);
       Swal.fire({
         title: "Error",
         text: error.message,
@@ -103,10 +121,16 @@ const Settings = () => {
           : "opacity-0 pointer-events-none duration-150"
       }
     >
-      <div className="flex items-center z-20 justify-center py-10 fixed top-0 left-0 bg-black/30 w-full h-full">
-        <div className="w-full max-w-lg bg-white rounded-2xl p-7">
+      <div
+        onClick={() => setModal(!modal)}
+        className="flex items-center z-20 justify-center py-10 fixed top-0 left-0 bg-black/30 w-full h-full"
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="w-full max-w-lg bg-white dark:bg-gray-900 rounded-2xl p-7"
+        >
           <div className="flex items-center justify-between gap-3 mb-5">
-            <h1 className="text-xl font-bold text-gray-800">
+            <h1 className="text-xl font-bold text-gray-800 dark:text-white">
               Personal Details
             </h1>
             <div
@@ -118,22 +142,9 @@ const Settings = () => {
           </div>
           <div>
             <form onSubmit={formik.handleSubmit}>
-              {/* <div>
-                <div className="w-15 h-15 flex items-center justify-center rounded-full overflow-hidden cursor-pointer shrink-0">
-                  {user.photoURL ? (
-                    <img
-                      src={user.photoURL}
-                      alt={user.displayName}
-                      className="w-full"
-                    />
-                  ) : (
-                    <h5 className="text-white bg-gray-800 w-full h-full flex items-center justify-center">
-                      {first ? first[0] : ""}
-                      {second ? second[0] : ""}
-                    </h5>
-                  )}
-                </div>
-              </div> */}
+              <ChangeProfile
+                onPhotoUpload={handleOnPhotoUpload}
+              ></ChangeProfile>
               <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden mb-4">
                 <label htmlFor="name">
                   <div className="h-full flex items-center justify-center bg-gray-200 px-2.5">
@@ -188,20 +199,16 @@ const Settings = () => {
   };
 
   return (
-    <div className="p-10 bg-white border border-gray-200 rounded-2xl">
-      <h1 className="text-2xl text-gray-800 font-extrabold mb-5">
+    <div className="p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
+      <h1 className="text-2xl text-gray-800 dark:text-white font-extrabold mb-5">
         Profile Information
       </h1>
       <div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-5">
           <div className="flex gap-3 items-center">
             <div className="w-30 h-30 flex items-center justify-center rounded-full overflow-hidden cursor-pointer shrink-0">
-              {user.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName}
-                  className="w-full"
-                />
+              {photoURL ? (
+                <img src={photoURL} alt={user.displayName} className="w-full" />
               ) : (
                 <h5 className="text-white bg-gray-800 w-full h-full flex items-center justify-center">
                   {first ? first[0] : ""}
@@ -210,8 +217,8 @@ const Settings = () => {
               )}
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                {userName}
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                {user?.displayName}
               </h2>
               <p>Email: {email || "NULL"}</p>
             </div>
@@ -225,6 +232,10 @@ const Settings = () => {
               Edit <FiEdit />
             </div>
           </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          Theme Mode <ThemeToggle></ThemeToggle>
         </div>
       </div>
       {EditModal}

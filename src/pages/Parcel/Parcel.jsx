@@ -179,19 +179,19 @@ const Parcel = () => {
 
   return (
     <div>
-      <div className="bg-white p-8 md:p-10 border border-gray-200 rounded-2xl">
+      <div className="bg-white dark:bg-gray-900 p-8 md:p-10 border border-gray-200 dark:border-gray-800 rounded-2xl">
         <div className="mb-5">
-          <h1 className="text-[40px] text-gray-800 font-extrabold mb-3">
+          <h1 className="text-[40px] text-gray-800 dark:text-white font-extrabold mb-3">
             Send A Parcel
           </h1>
-          <p className="text-xl font-medium text-gray-800">
+          <p className="text-xl font-medium text-gray-800 dark:text-white">
             Enter your parcel details
           </p>
         </div>
         <div>
           <form onSubmit={formik.handleSubmit}>
             {/* document or not field, parcel name or weight */}
-            <div className="border-y bg-gra border-gray-200 py-6 mb-4">
+            <div className="border-y bg-gra border-gray-200 dark:border-gray-800 py-6 mb-4">
               <div className="grid grid-cols-12 gap-5">
                 <div className="col-span-12">
                   <div className="flex gap-3 flex-wrap">
@@ -201,7 +201,7 @@ const Parcel = () => {
                     >
                       <input
                         id="document"
-                        className="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding ring-1 ring-lime-950/20 duration-150 transition-all outline-none checked:border-lime-500 checked:ring-lime-500"
+                        className="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white dark:bg-gray-900 bg-clip-padding ring-1 ring-lime-950/20 duration-150 transition-all outline-none checked:border-lime-500 checked:ring-lime-500"
                         type="radio"
                         onChange={formik.handleChange}
                         checked={formik.values.type === "Document"}
@@ -216,7 +216,7 @@ const Parcel = () => {
                     >
                       <input
                         id="nondocument"
-                        className="box-content duration-150 transition-all h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding ring-1 ring-lime-950/20 outline-none checked:border-lime-500 checked:ring-lime-500"
+                        className="box-content duration-150 transition-all h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white dark:bg-gray-900 bg-clip-padding ring-1 ring-lime-950/20 outline-none checked:border-lime-500 checked:ring-lime-500"
                         type="radio"
                         value="nondocument"
                         onChange={formik.handleChange}
@@ -277,7 +277,7 @@ const Parcel = () => {
               <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
                 {/* sender details */}
                 <div className="flex flex-col gap-4">
-                  <h5 className="text-gray-800 font-extrabold text-lg">
+                  <h5 className="text-gray-800 dark:text-white font-extrabold text-lg">
                     Sender Details
                   </h5>
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
@@ -418,7 +418,7 @@ const Parcel = () => {
 
                 {/* receiver details */}
                 <div className="flex flex-col gap-4">
-                  <h5 className="text-gray-800 font-extrabold text-lg">
+                  <h5 className="text-gray-800 dark:text-white font-extrabold text-lg">
                     Receiver Details
                   </h5>
                   <div className="flex border border-gray-300/70 h-10 rounded-sm overflow-hidden">
@@ -567,7 +567,7 @@ const Parcel = () => {
               </p>
               <button
                 type="submit"
-                className="px-4 shrink-0 py-2 bg-lime-400 border border-lime-500/50 hover:bg-lime-500 duration-100 rounded-xl text-gray-800 flex items-center gap-2 cursor-pointer"
+                className="px-4 shrink-0 py-2 bg-lime-400 border border-lime-500/50 hover:bg-lime-500 duration-100 rounded-xl text-gray-800 dark:text-white flex items-center gap-2 cursor-pointer"
               >
                 Proceed to Confirm Booking{" "}
                 <FaArrowRight className="w-5 shrink-0" />

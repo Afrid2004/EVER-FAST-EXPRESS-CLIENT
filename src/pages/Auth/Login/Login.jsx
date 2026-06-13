@@ -96,7 +96,7 @@ const Login = () => {
     errorMessageFunc(formik.errors.password);
   const authError = err && errorMessageFunc(err);
   return (
-    <div className="bg-white p-7 border border-gray-200 w-full sm:w-100 shadow-sm rounded-xl shadow-gray-200">
+    <div className="bg-white dark:bg-gray-900 p-7 border border-gray-200 dark:border-gray-800 w-full sm:w-100 shadow-sm rounded-xl shadow-gray-200">
       <div className="topper flex flex-col items-center justify-center gap-3 mb-5">
         <h2 className="font-bold text-2xl">Login</h2>
         <p className="text-center">
@@ -185,7 +185,7 @@ const Login = () => {
 
         <button
           onClick={handleGoogleLogin}
-          className="py-2 px-4 cursor-pointer border border-gray-200/70 w-full rounded-md bg-gray-200/80 hover:bg-gray-300/70 duration-75 flex  items-center justify-center gap-2"
+          className="py-2 px-4 cursor-pointer border border-gray-200 dark:border-gray-800/70 w-full rounded-md bg-gray-200/80 hover:bg-gray-300/70 duration-75 flex  items-center justify-center gap-2"
         >
           <FcGoogle size={18} />
           Continue with Google

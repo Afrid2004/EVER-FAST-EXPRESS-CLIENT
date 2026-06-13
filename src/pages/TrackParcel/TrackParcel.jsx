@@ -48,9 +48,9 @@ const TrackParcel = () => {
   };
 
   return (
-    <div className="p-10 bg-white border border-gray-200 rounded-2xl">
+    <div className="p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
       <div className="w-full max-w-xl mx-auto">
-        <h1 className="text-3xl text-center text-gray-800 font-extrabold mb-7">
+        <h1 className="text-3xl text-center text-gray-800 dark:text-white font-extrabold mb-7">
           Track Parcel
         </h1>
         <form onSubmit={handleSubmit}>
@@ -65,7 +65,7 @@ const TrackParcel = () => {
             />
             <button
               type="submit"
-              className="h-full flex items-center justify-center bg-lime-400 hover:bg-lime-500 px-3 text-gray-800 gap-1 cursor-pointer shrink-0"
+              className="h-full flex items-center justify-center bg-lime-400 hover:bg-lime-500 px-3 text-gray-800 dark:text-white gap-1 cursor-pointer shrink-0"
             >
               Track{" "}
               {isLoading ? (
@@ -238,7 +238,7 @@ const TrackParcel = () => {
                   const status = tracking.status.split("-").join(" ");
                   return (
                     <div key={tracking._id} className="h-full">
-                      <div className="p-5 border border-gray-200 rounded-2xl h-full">
+                      <div className="p-5 border border-gray-200 dark:border-gray-800 rounded-2xl h-full">
                         <div className="border-b-2 border-dashed border-gray-300 pb-2 mb-5">
                           <h3 className="uppercase font-bold text-gray-600">
                             {status}

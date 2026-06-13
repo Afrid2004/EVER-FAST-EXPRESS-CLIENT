@@ -13,7 +13,7 @@ const ErrorPage = () => {
                 <embed className="w-full" src="/images/error.svg" alt="error" />
               </div>
               <div className="flex flex-col items-center justify-center gap-5">
-                <h4 className="text-center text-2xl text-gray-800 font-extrabold">
+                <h4 className="text-center text-2xl text-gray-800 dark:text-white font-extrabold">
                   Page Not Found.
                 </h4>
                 <p className="text-gray-500 mb-4 text-center">

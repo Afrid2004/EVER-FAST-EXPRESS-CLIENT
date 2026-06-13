@@ -20,7 +20,7 @@ const Marchent = () => {
                 <Link className="bg-lime-400 text-center w-full lg:w-fit border border-lime-500/50 hover:bg-lime-500 duration-75 rounded-4xl px-8 py-4 text-lg">
                   Become a Merchant
                 </Link>
-                <Link className="border w-full lg:w-fit text-center border-lime-400 hover:bg-lime-400 duration-75 rounded-4xl px-8 py-4 text-lg text-lime-400 hover:text-gray-800">
+                <Link className="border w-full lg:w-fit text-center border-lime-400 hover:bg-lime-400 duration-75 rounded-4xl px-8 py-4 text-lg text-lime-400 hover:text-gray-800 dark:text-white">
                   Earn with Everfast Express
                 </Link>
               </div>

@@ -62,12 +62,12 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
+    <div className="p-5 lg:p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
       {isLoading ? (
         <LoadingDashboard></LoadingDashboard>
       ) : (
         <div>
-          <h1 className="text-3xl text-gray-800 font-extrabold mb-7">
+          <h1 className="text-3xl text-gray-800 dark:text-white font-extrabold mb-7">
             {greetings()}, {name}
           </h1>
 
@@ -82,12 +82,12 @@ const AdminDashboard = () => {
                   <div key={index}>
                     <div className="border border-gray-300/70 rounded-2xl p-5">
                       <div className="flex gap-4 items-center">
-                        <div className="w-12 h-12 bg-lime-400 border border-lime-500/80 rounded-full flex items-center justify-center shrink-0 text-gray-800">
+                        <div className="w-12 h-12 bg-lime-400 border border-lime-500/80 rounded-full flex items-center justify-center shrink-0 text-gray-800 dark:text-white">
                           {icon}
                         </div>
                         <div>
                           <p className="mb-1 text-gray-500">{dstats}</p>
-                          <h2 className="font-bold text-gray-800 text-4xl">
+                          <h2 className="font-bold text-gray-800 dark:text-white text-4xl">
                             {number}
                           </h2>
                         </div>

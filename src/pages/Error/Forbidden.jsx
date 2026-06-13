@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const Forbidden = () => {
   return (
-    <div className="p-10 bg-white border border-gray-200 rounded-2xl">
+    <div className="p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
       <div className="flex items-center justify-center py-10">
         <div>
           <div class="relative flex items-center justify-center mb-10">
@@ -17,7 +17,7 @@ const Forbidden = () => {
               />
             </div>
           </div>
-          <h1 className="text-3xl text-gray-800 font-extrabold mb-3">
+          <h1 className="text-3xl text-gray-800 dark:text-white font-extrabold mb-3">
             Forbidden Access
           </h1>
           <p className="text-center text-gray-500 mb-7">

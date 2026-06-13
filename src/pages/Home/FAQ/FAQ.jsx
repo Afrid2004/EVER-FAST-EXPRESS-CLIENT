@@ -21,7 +21,7 @@ const FAQ = () => {
     <div className="py-5">
       <div className="container">
         <div className="mb-8 flex flex-col gap-4 justify-center items-center">
-          <h3 className="text-gray-800 font-extrabold text-3xl text-center">
+          <h3 className="text-gray-800 dark:text-white font-extrabold text-3xl text-center">
             Frequently Asked Question (FAQ)
           </h3>
           <p className="text-gray-500 w-full max-w-3xl text-center">
@@ -39,17 +39,17 @@ const FAQ = () => {
                 <div key={index}>
                   <div
                     onClick={() => handleAccordion(index)}
-                    className={`cursor-pointer hover:border-lime-500 duration-150 p-6 border border-gray-200 rounded-2xl ${isOpen ? "border-lime-500 bg-lime-50" : "bg-white"}`}
+                    className={`cursor-pointer hover:border-lime-500 duration-150 p-6 border border-gray-200 dark:border-gray-800 rounded-2xl ${isOpen ? "border-lime-500 bg-lime-50" : "bg-white dark:bg-gray-900"}`}
                   >
                     <div className="flex items-center justify-between gap-3">
                       <h2
-                        className={`text-[16px] md:text-lg font-bold ${isOpen ? "text-lime-500" : "text-gray-800"}`}
+                        className={`text-[16px] md:text-lg font-bold ${isOpen ? "text-lime-500" : "text-gray-800 dark:text-white"}`}
                       >
                         {data.question}
                       </h2>
                       <div className="shrink-0">
                         <IoIosArrowDown
-                          className={`w-5 h-5 duration-150 transition-all ${isOpen ? "rotate-180 text-lime-500" : "rotate-0 text-gray-800"}`}
+                          className={`w-5 h-5 duration-150 transition-all ${isOpen ? "rotate-180 text-lime-500" : "rotate-0 text-gray-800 dark:text-white"}`}
                         ></IoIosArrowDown>
                       </div>
                     </div>

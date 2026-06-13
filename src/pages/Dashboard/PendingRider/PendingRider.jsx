@@ -55,8 +55,8 @@ const PendingRider = () => {
     handleRiderStatus(rider, "rejected", "layoff");
   };
   return (
-    <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
-      <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
+    <div className="p-5 lg:p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
+      <h1 className="text-3xl text-gray-800 dark:text-white font-extrabold mb-5">
         Pending Riders
       </h1>
 
@@ -67,7 +67,7 @@ const PendingRider = () => {
           <span className="mb-3 block">
             Total pendings: <strong>{riders.length}</strong>
           </span>
-          <table className="table table-zebra border border-gray-200/80">
+          <table className="table table-zebra border border-gray-200 dark:border-gray-800/80">
             {/* head */}
             <thead>
               <tr>

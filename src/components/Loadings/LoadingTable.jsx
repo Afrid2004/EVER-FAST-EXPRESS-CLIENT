@@ -3,7 +3,7 @@ import React from "react";
 const LoadingTable = ({ rows = 3 }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="table table-zebra border border-gray-200/80">
+      <table className="table table-zebra border border-gray-200 dark:border-gray-800/80">
         <thead>
           <tr>
             <th>Sl.</th>

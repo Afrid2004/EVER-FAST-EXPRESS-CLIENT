@@ -121,11 +121,11 @@ const Rider = () => {
   };
 
   return (
-    <div className="bg-white p-8 md:p-10 border border-gray-200 rounded-2xl">
+    <div className="bg-white dark:bg-gray-900 p-8 md:p-10 border border-gray-200 dark:border-gray-800 rounded-2xl">
       <div className="flex flex-col md:flex-row md:items-center gap-5">
         <div className="w-full md:max-w-6/12">
           <div className="flex flex-col gap-5 mb-5">
-            <h1 className="font-extrabold text-[40px] text-gray-800">
+            <h1 className="font-extrabold text-[40px] text-gray-800 dark:text-white">
               Be a Rider
             </h1>
             <p className="text-gray-500">
@@ -133,7 +133,7 @@ const Rider = () => {
               zero hassle. From personal packages to business shipments — we
               deliver on time, every time.
             </p>
-            <h2 className="text-gray-800 font-extrabold text-2xl">
+            <h2 className="text-gray-800 dark:text-white font-extrabold text-2xl">
               Tell us about yourself
             </h2>
           </div>

@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
-    <div className="bg-white h-screen overflow-auto">
+    <div className="bg-white dark:bg-gray-900 h-screen overflow-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
         <div className="p-5 h-full flex flex-col gap-5">
           <div className="mx-auto">

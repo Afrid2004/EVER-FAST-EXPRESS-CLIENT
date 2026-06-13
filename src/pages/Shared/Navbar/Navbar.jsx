@@ -45,12 +45,12 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="dropdown-content menu border border-gray-200 flex flex-col gap-2 bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+              className="dropdown-content menu border border-gray-200 dark:border-gray-800 flex flex-col gap-2 bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <li>
                 <Link
                   to="/dashboard"
-                  className="bg-gray-100 text-sm  font-medium border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
+                  className="bg-gray-100 text-sm  font-medium border border-gray-200 dark:border-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
                 >
                   Dashboard
                 </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/track-parcel"
-                  className="bg-gray-100 text-sm  font-medium border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
+                  className="bg-gray-100 text-sm  font-medium border border-gray-200 dark:border-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
                 >
                   Track Parcel
                 </Link>
@@ -67,7 +67,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={logout}
-                  className="bg-gray-100 text-sm  font-medium border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
+                  className="bg-gray-100 text-sm  font-medium border border-gray-200 dark:border-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 duration-75"
                 >
                   Logout
                 </button>
@@ -88,7 +88,7 @@ const Navbar = () => {
         <>
           <Link
             to="/login"
-            className="bg-gray-100 font-medium border border-gray-200 px-4 py-2 rounded-xl hover:bg-gray-200 duration-75"
+            className="bg-gray-100 font-medium border border-gray-200 dark:border-gray-800 px-4 py-2 rounded-xl hover:bg-gray-200 duration-75"
           >
             Login
           </Link>
@@ -112,7 +112,7 @@ const Navbar = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`absolute bg-white duration-300 w-full max-w-sm h-full right-0 top-0 p-4 overflow-auto ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`absolute bg-white dark:bg-gray-900 duration-300 w-full max-w-sm h-full right-0 top-0 p-4 overflow-auto ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="modal-topper border-b border-b-gray-300/80 pb-4 mb-4">
           <div>
@@ -147,7 +147,7 @@ const Navbar = () => {
   return (
     <div className="sticky top-2 z-20">
       <div className="container">
-        <div className="bg-white/70 backdrop-blur-3xl rounded-2xl px-8 py-5 border border-gray-200 mt-5">
+        <div className="bg-white dark:bg-gray-900/70 backdrop-blur-3xl rounded-2xl px-8 py-5 border border-gray-200 dark:border-gray-800 mt-5">
           <div className="flex items-center justify-between">
             <Logo></Logo>
             {/* Desktop Menus */}

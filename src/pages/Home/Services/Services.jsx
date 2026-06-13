@@ -16,7 +16,7 @@ const Services = () => {
         {servicesData.map((data, index) => {
           return (
             <div key={index}>
-              <div className="bg-white hover:bg-lime-300 duration-200 h-full rounded-2xl p-8">
+              <div className="bg-white dark:bg-gray-900 hover:bg-lime-300 duration-200 h-full rounded-2xl p-8">
                 <div className="flex flex-col gap-4 items-center">
                   <div className="w-14 h-14">
                     <img
@@ -26,7 +26,7 @@ const Services = () => {
                     />
                   </div>
                   <div className="text-center">
-                    <h5 className="text-xl text-gray-800 font-bold mb-3">
+                    <h5 className="text-xl text-gray-800 dark:text-white font-bold mb-3">
                       {data.title}
                     </h5>
                     <p className="text-gray-500 line-clamp-3">{data.desc}</p>

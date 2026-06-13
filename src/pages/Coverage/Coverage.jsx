@@ -51,18 +51,18 @@ const Coverage = () => {
 
   return (
     <div>
-      <div className="p-10 border border-gray-200 rounded-2xl bg-white">
+      <div className="p-10 border border-gray-200 dark:border-gray-800 rounded-2xl bg-white dark:bg-gray-900">
         <div>
-          <div className="flex flex-col gap-8 border-b pb-8 mb-8 border-gray-200">
-            <h2 className="text-4xl font-bold text-gray-800">
+          <div className="flex flex-col gap-8 border-b pb-8 mb-8 border-gray-200 dark:border-gray-800">
+            <h2 className="text-4xl font-bold text-gray-800 dark:text-white">
               We are available in 64 districts
             </h2>
             <div>
               <form onSubmit={handleSearch}>
-                <div className="bg-gray-100 border border-gray-200 h-11 flex items-center justify-between gap-3 w-full max-w-md rounded-4xl overflow-hidden">
+                <div className="bg-gray-100 border border-gray-200 dark:border-gray-800 h-11 flex items-center justify-between gap-3 w-full max-w-md rounded-4xl overflow-hidden">
                   <div className="h-full shrink-0">
                     <label htmlFor="search">
-                      <div className="h-full flex items-center justify-center ps-3 text-2xl text-gray-800">
+                      <div className="h-full flex items-center justify-center ps-3 text-2xl text-gray-800 dark:text-white">
                         <IoSearchOutline></IoSearchOutline>
                       </div>
                     </label>
@@ -92,7 +92,7 @@ const Coverage = () => {
 
           <div>
             <div className="mb-8">
-              <h3 className="font-bold text-3xl text-gray-800">
+              <h3 className="font-bold text-3xl text-gray-800 dark:text-white">
                 We deliver almost all over Bangladesh
               </h3>
               {searchResult && (

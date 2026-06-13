@@ -74,10 +74,12 @@ const MyParcels = () => {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="w-full max-w-sm lg:max-w-2xl bg-white rounded-xl p-5 h-full  overflow-y-auto lg:h-fit"
+          className="w-full max-w-sm lg:max-w-2xl bg-white dark:bg-gray-900 rounded-xl p-5 h-full  overflow-y-auto lg:h-fit"
         >
           <div className="flex items-center justify-between gap-3">
-            <h1 className="text-xl font-bold text-gray-800">Parcel Details</h1>
+            <h1 className="text-xl font-bold text-gray-800 dark:text-white">
+              Parcel Details
+            </h1>
             <div
               onClick={() => setModal(!modal)}
               className="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-300 text-2xl cursor-pointer hover:bg-gray-200 duration-75 text-gray-600"
@@ -166,8 +168,8 @@ const MyParcels = () => {
   };
 
   return (
-    <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
-      <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
+    <div className="p-5 lg:p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
+      <h1 className="text-3xl text-gray-800 dark:text-white font-extrabold mb-5">
         Manage Parcel
       </h1>
 
@@ -178,7 +180,7 @@ const MyParcels = () => {
           <span className="mb-3 block">
             Total parcel: <strong>{parcels.length}</strong>
           </span>
-          <table className="table table-zebra border border-gray-200/80">
+          <table className="table table-zebra border border-gray-200 dark:border-gray-800/80">
             {/* head */}
             <thead>
               <tr>
@@ -232,7 +234,7 @@ const MyParcels = () => {
                             {parcel.deliveryStatus.toUpperCase()}
                           </p>
                           <Link
-                            className="flex items-center justify-center bg-lime-400 hover:bg-lime-500 px-3 py-1.5 rounded-sm text-gray-800 gap-1 cursor-pointer shrink-0 w-fit text-sm"
+                            className="flex items-center justify-center bg-lime-400 hover:bg-lime-500 px-3 py-1.5 rounded-sm text-gray-800 dark:text-white gap-1 cursor-pointer shrink-0 w-fit text-sm"
                             to={`/track-parcel?trackingid=${parcel.trackingId}`}
                           >
                             Track{" "}

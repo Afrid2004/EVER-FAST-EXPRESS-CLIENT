@@ -11,7 +11,7 @@ const HowItWorks = () => {
         {worksData.map((data, index) => {
           return (
             <div key={index} className="hover:-translate-y-2 duration-150">
-              <div className="bg-white border h-full border-gray-200 rounded-2xl p-8">
+              <div className="bg-white dark:bg-gray-900 border h-full border-gray-200 dark:border-gray-800 rounded-2xl p-8">
                 <div className="flex flex-col gap-4">
                   <div className="w-14 h-14">
                     <img
@@ -21,7 +21,7 @@ const HowItWorks = () => {
                     />
                   </div>
                   <div>
-                    <h4 className="text-xl text-gray-800 font-bold mb-3">
+                    <h4 className="text-xl text-gray-800 dark:text-white font-bold mb-3">
                       {data.title}
                     </h4>
                     <p className="text-gray-500">{data.desc}</p>

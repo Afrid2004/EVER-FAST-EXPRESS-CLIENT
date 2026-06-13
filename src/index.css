@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 @plugin "daisyui" {
   themes: light --default;
 }
@@ -9,7 +10,7 @@
   font-style: normal;
 }
 body {
-  @apply bg-gray-100 py-1;
+  @apply bg-gray-100 py-1 dark:bg-gray-800;
 }
 .container {
   @apply px-4 lg:px-0 w-full max-w-110 sm:max-w-150 md:max-w-187.5 lg:max-w-250 xl:max-w-300 2xl:max-w-325 mx-auto;
@@ -26,7 +27,7 @@ body {
 
 .mobile-menu > a,
 .mobile-menu > button {
-  @apply bg-gray-200/50 px-4 py-2 border border-gray-200 rounded-lg hover:bg-lime-400 hover:border-lime-500/50 duration-75;
+  @apply bg-gray-200/50 px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg hover:bg-lime-400 hover:border-lime-500/50 duration-75;
 }
 
 .dashboard-link .active {

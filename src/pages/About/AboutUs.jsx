@@ -9,12 +9,12 @@ const AboutUs = () => {
     setActive(index);
   };
   return (
-    <div className="bg-white p-8 lg:p-10 rounded-2xl border border-gray-200">
+    <div className="bg-white dark:bg-gray-900 p-8 lg:p-10 rounded-2xl border border-gray-200 dark:border-gray-800">
       <div className="flex flex-col gap-9 lg:gap-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div>
             <div className="mb-5">
-              <h1 className="text-gray-800 font-extrabold text-5xl mb-5">
+              <h1 className="text-gray-800 dark:text-white font-extrabold text-5xl mb-5">
                 About Us
               </h1>
               <p className="text-gray-500 w-full max-w-xl">
@@ -28,8 +28,8 @@ const AboutUs = () => {
                 {statsData.map((data, index) => {
                   return (
                     <div key={index}>
-                      <div className="border hover:-translate-y-2 duration-150 bg-white border-gray-200 rounded-2xl border-b-3 p-5">
-                        <h2 className="text-4xl font-extrabold text-gray-800 mb-3">
+                      <div className="border hover:-translate-y-2 duration-150 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 rounded-2xl border-b-3 p-5">
+                        <h2 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-3">
                           {data.title}
                         </h2>
                         <div className="flex items-center gap-1 text-lime-500 ">
@@ -84,7 +84,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-200 w-full"></div>
+        <div className="border-t border-gray-200 dark:border-gray-800 w-full"></div>
         <div>
           <div>
             {/* tab topper */}
@@ -102,7 +102,7 @@ const AboutUs = () => {
                         ${
                           isActive
                             ? "text-lime-500 border-lime-500"
-                            : "text-gray-800 border-gray-200"
+                            : "text-gray-800 dark:text-white border-gray-200 dark:border-gray-800"
                         }
                       `}
                     >
@@ -121,14 +121,14 @@ const AboutUs = () => {
               >
                 <div className="flex flex-col lg:flex-row items-start gap-5">
                   <div>
-                    <h3 className="text-3xl font-extrabold text-gray-800 mb-5">
+                    <h3 className="text-3xl font-extrabold text-gray-800 dark:text-white mb-5">
                       {aboutData[active].title.toUpperCase()}
                     </h3>
                     <p className="leading-7 text-gray-700">
                       {aboutData[active].desc}
                     </p>
                   </div>
-                  <div className="aspect-4/3 rounded-2xl overflow-hidden bg-white border border-lime-500 p-3">
+                  <div className="aspect-4/3 rounded-2xl overflow-hidden bg-white dark:bg-gray-900 border border-lime-500 p-3">
                     <img
                       className="w-full h-full rounded-xl hover:scale-110 duration-200"
                       src={aboutData[active].image}

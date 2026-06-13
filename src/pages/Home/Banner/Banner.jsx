@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 
 const Banner = () => {
   return (
-    <div className="bg-white rounded-2xl p-10 border border-gray-200">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl p-10 border border-gray-200 dark:border-gray-800">
       <div>
         <div className="mb-5">
           <Swiper
@@ -35,7 +35,7 @@ const Banner = () => {
                 <div className="grid grid-cols-12 gap-5 items-center">
                   <div className="col-span-12 lg:col-span-7">
                     <div className="flex flex-col gap-7">
-                      <h1 className="text-gray-800 text-[40px] lg:text-6xl font-extrabold lg:leading-20">
+                      <h1 className="text-gray-800 dark:text-white text-[40px] lg:text-6xl font-extrabold lg:leading-20">
                         We Make Sure Your{" "}
                         <span className="text-lime-500">Parcel Arrives</span> On
                         Time – No Fuss.
@@ -48,7 +48,7 @@ const Banner = () => {
 
                       <div className="flex flex-col lg:flex-row lg:items-center gap-3">
                         <Link to="/" className="flex items-center">
-                          <div className="text-gray-800 bg-lime-400 font-medium text-lg border border-lime-500/50 px-4 py-2 rounded-4xl hover:bg-lime-500 duration-75 grow">
+                          <div className="text-gray-800 dark:text-white bg-lime-400 font-medium text-lg border border-lime-500/50 px-4 py-2 rounded-4xl hover:bg-lime-500 duration-75 grow">
                             Track Your Parcel
                           </div>
                           <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white -rotate-45">
@@ -83,7 +83,7 @@ const Banner = () => {
                 <div className="grid grid-cols-12 gap-5 items-center">
                   <div className="col-span-12 lg:col-span-7">
                     <div className="flex flex-col gap-7">
-                      <h1 className="text-gray-800 text-[40px] lg:text-6xl font-extrabold lg:leading-20">
+                      <h1 className="text-gray-800 dark:text-white text-[40px] lg:text-6xl font-extrabold lg:leading-20">
                         <span className="text-lime-500">Fastest</span> Delivery
                         & <span className="text-lime-500">Easy</span> Pickup
                       </h1>
@@ -95,7 +95,7 @@ const Banner = () => {
 
                       <div className="flex flex-col lg:flex-row lg:items-center gap-3">
                         <Link to="/" className="flex items-center">
-                          <div className="text-gray-800 bg-lime-400 font-medium text-lg border border-lime-500/50 px-4 py-2 rounded-4xl hover:bg-lime-500 duration-75 grow">
+                          <div className="text-gray-800 dark:text-white bg-lime-400 font-medium text-lg border border-lime-500/50 px-4 py-2 rounded-4xl hover:bg-lime-500 duration-75 grow">
                             Track Your Parcel
                           </div>
                           <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white -rotate-45">
@@ -130,7 +130,7 @@ const Banner = () => {
                 <div className="grid grid-cols-12 gap-5 items-center">
                   <div className="col-span-12 lg:col-span-7">
                     <div className="flex flex-col gap-7">
-                      <h1 className="text-gray-800 text-[40px] lg:text-6xl font-extrabold lg:leading-20">
+                      <h1 className="text-gray-800 dark:text-white text-[40px] lg:text-6xl font-extrabold lg:leading-20">
                         Delivery in{" "}
                         <span className="text-lime-500">30 Minutes</span> at
                         your doorstep
@@ -143,7 +143,7 @@ const Banner = () => {
 
                       <div className="flex flex-col lg:flex-row lg:items-center gap-3">
                         <Link to="/" className="flex items-center">
-                          <div className="text-gray-800 bg-lime-400 font-medium text-lg border border-lime-500/50 px-4 py-2 rounded-4xl hover:bg-lime-500 duration-75 grow">
+                          <div className="text-gray-800 dark:text-white bg-lime-400 font-medium text-lg border border-lime-500/50 px-4 py-2 rounded-4xl hover:bg-lime-500 duration-75 grow">
                             Track Your Parcel
                           </div>
                           <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white -rotate-45">
@@ -178,17 +178,17 @@ const Banner = () => {
 
         {/* custom pagination and prev and next btn */}
         <div>
-          <div className="flex items-center justify-between gap-5 bg-white">
-            <div className="flex items-center gap-3 bg-white rounded-4xl">
+          <div className="flex items-center justify-between gap-5 bg-white dark:bg-gray-900">
+            <div className="flex items-center gap-3 bg-white dark:bg-gray-900 rounded-4xl">
               <button
                 aria-label="Previous Slide"
-                className="prev-btn cursor-pointer w-10 h-10 bg-white flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700"
+                className="prev-btn cursor-pointer w-10 h-10 bg-white dark:bg-gray-900 flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700"
               >
                 <FaArrowLeft />
               </button>
               <button
                 aria-label="Next Slide"
-                className="next-btn cursor-pointer w-10 h-10 bg-white flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700"
+                className="next-btn cursor-pointer w-10 h-10 bg-white dark:bg-gray-900 flex items-center justify-center text-md border border-gray-300/80 rounded-full hover:bg-lime-400 active:bg-lime-500 duration-75 text-gray-700"
               >
                 <FaArrowRight />
               </button>

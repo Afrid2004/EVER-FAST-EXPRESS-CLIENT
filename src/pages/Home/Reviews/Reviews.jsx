@@ -22,7 +22,7 @@ const Reviews = ({ reviewPromise }) => {
   return (
     <div className="py-10">
       <div className="mb-8 flex flex-col gap-4 justify-center items-center">
-        <h3 className="text-gray-800 font-extrabold text-3xl">
+        <h3 className="text-gray-800 dark:text-white font-extrabold text-3xl">
           What our customers are sayings
         </h3>
         <p className="text-gray-500 w-full max-w-3xl text-center">
@@ -80,7 +80,7 @@ const Reviews = ({ reviewPromise }) => {
               {reviewData.map((data) => {
                 return (
                   <SwiperSlide key={data.id}>
-                    <div className="bg-white border select-none border-gray-200 p-8 rounded-2xl">
+                    <div className="bg-white dark:bg-gray-900 border select-none border-gray-200 dark:border-gray-800 p-8 rounded-2xl">
                       <div className="flex flex-col gap-5">
                         <div className="border-b-2 border-dashed border-gray-300 pb-3">
                           <div className="text-lime-500 text-4xl mb-3">
@@ -89,7 +89,7 @@ const Reviews = ({ reviewPromise }) => {
                           <p className="text-gray-700">{data.review}</p>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+                          <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 dark:border-gray-800">
                             <img
                               src={data.image}
                               alt={data.user_name}
@@ -98,7 +98,7 @@ const Reviews = ({ reviewPromise }) => {
                           </div>
                           <div>
                             <div className="flex items-center gap-1">
-                              <h4 className="text-lg font-extrabold text-gray-800">
+                              <h4 className="text-lg font-extrabold text-gray-800 dark:text-white">
                                 {data.user_name}
                               </h4>
                               <MdVerifiedUser className="shrink-0 text-gray-700"></MdVerifiedUser>
@@ -118,11 +118,11 @@ const Reviews = ({ reviewPromise }) => {
         </div>
 
         <div className="flex items-center gap-3 justify-center">
-          <div className="review-prev w-10 h-10 bg-white flex items-center justify-center text-gray-700 border hover:border-gray-800 hover:bg-gray-800 hover:text-lime-400 active:bg-gray-950 border-gray-200 rounded-full cursor-pointer">
+          <div className="review-prev w-10 h-10 bg-white dark:bg-gray-900 flex items-center justify-center text-gray-700 border hover:border-gray-800 hover:bg-gray-800 hover:text-lime-400 active:bg-gray-950 border-gray-200 dark:border-gray-800 rounded-full cursor-pointer">
             <FaArrowLeft />
           </div>
           <div className="review-pagination"></div>
-          <div className="review-next w-10 h-10 bg-white flex items-center justify-center text-gray-700 border hover:border-gray-800 hover:bg-gray-800 hover:text-lime-400 active:bg-gray-950 border-gray-200 rounded-full cursor-pointer">
+          <div className="review-next w-10 h-10 bg-white dark:bg-gray-900 flex items-center justify-center text-gray-700 border hover:border-gray-800 hover:bg-gray-800 hover:text-lime-400 active:bg-gray-950 border-gray-200 dark:border-gray-800 rounded-full cursor-pointer">
             <FaArrowRight />
           </div>
         </div>

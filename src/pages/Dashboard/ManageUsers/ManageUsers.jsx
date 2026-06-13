@@ -84,8 +84,8 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="p-5 lg:p-10 bg-white border border-gray-200 rounded-2xl">
-      <h1 className="text-3xl text-gray-800 font-extrabold mb-5">
+    <div className="p-5 lg:p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
+      <h1 className="text-3xl text-gray-800 dark:text-white font-extrabold mb-5">
         Manage Users
       </h1>
 
@@ -133,7 +133,7 @@ const ManageUsers = () => {
         <LoadingTable></LoadingTable>
       ) : users.result.length > 0 ? (
         <div className="overflow-x-auto relative">
-          <table className="table table-zebra border border-gray-200/80">
+          <table className="table table-zebra border border-gray-200 dark:border-gray-800/80">
             {/* head */}
             <thead>
               <tr>
@@ -201,7 +201,7 @@ const ManageUsers = () => {
             <div className="w-full h-30 absolute left-0 bottom-0 flex items-end justify-center bg-linear-to-b from-transparent to-white to-90%">
               <button
                 onClick={handleSeeMore}
-                className="px-4 py-2 bg-lime-400 hover:bg-lime-500 duration-150 rounded-4xl mb-3 text-gray-800 text-sm cursor-pointer flex items-center gap-2"
+                className="px-4 py-2 bg-lime-400 hover:bg-lime-500 duration-150 rounded-4xl mb-3 text-gray-800 dark:text-white text-sm cursor-pointer flex items-center gap-2"
               >
                 See more <IoChevronDown />
               </button>
