@@ -34,7 +34,6 @@ const TrackParcel = () => {
       return res.data;
     },
   });
-  console.log(trackings);
   const handleSubmit = (e) => {
     e.preventDefault();
     const value = e.target.trackingId.value.trim();

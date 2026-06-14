@@ -25,7 +25,6 @@ const CompletedDeliveries = () => {
     }
   };
 
-  console.log(parcels);
   return (
     <div className="p-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl">
       <h1 className="text-3xl text-gray-800 dark:text-white font-extrabold mb-5">

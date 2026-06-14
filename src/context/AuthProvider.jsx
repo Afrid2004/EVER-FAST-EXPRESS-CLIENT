@@ -26,7 +26,6 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   googleProvider.addScope("email");
   googleProvider.addScope("profile");
-  console.log(user);
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(Auth, email, password);
   };
