@@ -1,34 +1,32 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import useAxiosSecure from "../Hooks/AxiosSecure";
 import useAuth from "../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import useAxios from "../Hooks/AxiosHook";
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const { user } = useAuth();
-  const axiosSecureInstance = useAxiosSecure();
+  const axiosInstance = useAxios();
   const [theme, setTheme] = useState("light");
 
-  const { data: themeData } = useQuery({
-    queryKey: ["themes", user?.uid], // theme এর বদলে user?.uid
-    enabled: !!user?.uid, // user না থাকলে fetch করবে না
+  const { data: themeData, isLoading: themeLoading } = useQuery({
+    queryKey: ["themes", user?.uid],
+    enabled: !!user?.uid,
     queryFn: async () => {
-      const res = await axiosSecureInstance.get(`/users/${user.uid}/theme`);
-      return res.data.theme || "light"; // ← return করতে হবে
+      const res = await axiosInstance.get(`/users/${user.uid}/theme`);
+      return res.data.theme || "light";
     },
   });
 
-  // themeData আসলে apply করুন
   useEffect(() => {
     if (themeData) {
-      setTheme(themeData);
       applyTheme(themeData);
     }
   }, [themeData]);
 
   const applyTheme = (themeValue) => {
-    const root = document.documentElement;
+    const root = document.body;
     if (themeValue === "dark") {
       root.classList.add("dark");
     } else {
@@ -41,11 +39,11 @@ export const ThemeProvider = ({ children }) => {
     setTheme(newTheme);
     applyTheme(newTheme);
     const themeInfo = { theme: newTheme };
-    await axiosSecureInstance.patch(`/users/${user.uid}/theme`, themeInfo);
+    await axiosInstance.patch(`/users/${user.uid}/theme`, themeInfo);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, themeLoading }}>
       {children}
     </ThemeContext.Provider>
   );

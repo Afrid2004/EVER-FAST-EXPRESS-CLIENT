@@ -7,9 +7,9 @@ import LoadingPage from "../Loadings/LoadingPage";
 import useTheme from "../../Hooks/useTheme";
 
 const ThemeToggle = () => {
-  const { user, loading } = useAuth();
+  const { user, loading, themeLoading } = useAuth();
   const { theme, toggleTheme } = useTheme();
-  if (loading || theme === null) {
+  if (loading || theme === null || themeLoading) {
     return <LoadingPage></LoadingPage>;
   }
 
